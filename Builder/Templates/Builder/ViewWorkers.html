@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewWorkers</title>
+</head>
+<body>
+    <table border="2">
+        <tr>
+            <td>WokerType</td>
+            <td><select name="sel_workertype"  required id="sel_workertype">
+                <option value="">---select---</option>
+                {% for i in workertypedata %}
+                <option value="{{i.id}}">{{i.workertype_name}}</option>
+                {% endfor %}
+            </select></td>
+        </tr>
+    </table>
+    <table border="2">
+        <tr>
+            <td>SINO</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Contact</td>
+            <td>Photo</td>
+            <td>Type</td>
+            <td>Action</td>
+        </tr>
+        {% for i in viewworkersdata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.worker_name}}</td>
+            <td>{{i.worker_email}}</td>
+            <td>{{i.worker_contact}}</td>
+            <td>{{i.worker_photo}}</td>
+            <td>{{i.workertype}}</td>
+            <td><a href="{%url 'Builder:assign' i.id rid %}">Assign</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location="{% url 'Builder:ViewWorkers' rid %}"
+</script>
+{% endif %}

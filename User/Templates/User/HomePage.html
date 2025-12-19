@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+</head>
+<body>
+    welcome {{user.user_name}}
+
+
+    <a href="{% url 'User:MyProfile' %}">MyProfile</a>
+    <a href="{% url 'User:ViewBuilders' %}">ViewBuilders</a>
+    <a href="{% url 'User:Complaint' %}">Complaint</a>
+    <a href="{% url 'User:Feedback' %}">Feedback</a>
+    <a href="{% url 'User:MyRequest' %}">MyRequest</a>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewRequest</title>
+</head>
+
+<body>
+    <table border="2">
+        <tr>
+            <td>SINO</td>
+            <td>content</td>
+            <td>file</td>
+            <td>Date</td>
+            <td>UserDetails</td>
+            <td>Action</td>
+        </tr>
+        {% for i in viewreqdata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.request_content}}</td>
+            <td>{{i.request_file}}</td>
+            <td>{{i.request_date}}</td>
+            <td>{{i.user.user_name}}<br>
+                {{i.user.user_email}}<br>
+                {{i.user.user_contact}}<br>
+                {{i.user.user_address}}<br>
+            </td>
+            <td>
+                {% if i.request_status == 0 %}
+                <a href="{% url 'Builder:Amount' i.id %}">Accept</a>
+                <a href="{% url 'Builder:Reject' i.id %}">Reject</a>
+                {% elif i.request_status == 1 %} Accepted
+                {% elif i.request_status == 3 %}
+                <a href="{% url 'Builder:ViewWorkers' i.id  %}">ViewWorkers</a>
+                {% elif i.request_status == 2 %}Rejected
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location = "{% url 'Builder:ViewRequest' %}"
+</script>
+{% endif %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="2">
+        <tr>
+            <td>file</td>
+            <td><input type="file" name="file_gallery" required accept="image/*" id="file_gallery"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input type="submit" value="submit"></td>
+    
+        </tr>
+    </table>
+    </form>
+    <table border="2">
+        <tr>
+            <td>SINO</td>
+            <td>Gallery</td>
+            <td>Action</td>
+        </tr>
+        {% for i in gallerydata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.work_file}}</td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+      window.location="{% url 'Builder:Work' %}"
+    </script>
+{% endif %}

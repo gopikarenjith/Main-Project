@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewBuilders</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <style>
+         .text-warning {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+    <table border="2">
+        <tr>
+            <td>SINO</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Contact</td>
+            <td>Logo</td>
+            <td>Address</td>
+            <td>District</td>
+            <td>Place</td>
+            <td>Rating</td>
+            <td>Action</td>
+        </tr>
+         {% for i,j in viewdata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.builders_name}}</td>
+            <td>{{i.builders_email}}</td>
+            <td>{{i.builders_contact}}</td>
+            <td><img src="{{i.builders_logo.url}}" width="150" alt=""></td>
+            <td>{{i.builders_address}}</td>
+            <td>{{i.place.district.district_name}}</td>
+            <td>{{i.place.place_name}}</td>
+            <td>
+                  {% for k in ar %} {% if k <= j %}<i class="fa-solid fa-star text-warning"></i>
+                    {% else %}
+                    <i class="fa-solid fa-star star-light"></i>
+                    {% endif %} {% endfor %}
+            </td>
+            <td><a href="{% url 'User:ViewWork' i.id %}">viewwork</a> 
+                 <a href="{% url 'User:Request' i.id %}">Request</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

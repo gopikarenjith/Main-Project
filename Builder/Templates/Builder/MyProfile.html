@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyProfile</title>
+
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="2">
+            <tr>
+                <td colspan="2"><img src="{{builders.builders_logo.url}}" width="150" alt=""></td>
+            </tr>
+            <tr>
+
+                <td>Name</td>
+                <td>{{builders.builders_name}}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{builders.builders_email}}</td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td>{{builders.builders_contact}}</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>{{builders.builders_address}}</td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td>{{builders.place.district.district_name}}</td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td>{{builders.place.place_name}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><a href="{% url 'Builder:EditProfile' %}">Edit profile </a> | <a href="{% url 'Builder:ChangePassword' %}"> Change Password </a></td>
+                
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

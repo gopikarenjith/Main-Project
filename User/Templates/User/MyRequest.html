@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyRequest</title>
+</head>
+
+<body>
+    <table border="2">
+        <tr>
+            <td>SINO</td>
+            <td>Content</td>
+            <td>File</td>
+            <td>Date</td>
+            <td>BuilderDetails</td>
+            <td>Amount</td>
+            <td>Status</td>
+            <td>Action</td>
+        </tr>
+        {% for i in reqdata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.request_content}}</td>
+            <td>{{i.request_file}}</td>
+            <td>{{i.request_date}}</td>
+            <td>{{i.builder.builders_name}}<br>
+                {{i.builder.builders_email}}<br>
+                {{i.builder.builders_contact}}<br>
+                {{i.builder.builders_address}}<br>
+            </td>
+            <td>{{i.request_amount}}</td>
+            <td>
+                {% if i.request_status == 0 %}
+                pending
+
+                {% elif i.request_status == 1 %}
+                Accept
+                <a href="{% url 'User:Accept' i.id %}">Accept</a>
+                <a href="{% url 'User:Reject' i.id %}">Reject</a>
+                {% elif i.request_status == 3 %}
+                Confirmed | 
+                <a href="{% url 'User:Payment' i.id %}">Advance Payment</a>
+                {% elif i.request_status == 2 %} Rejected
+                {% endif %}<br>
+
+
+            </td>
+            <td><a href="{% url 'User:ViewUpdate' i.id %}">View Update</a>
+                <a href="{% url 'User:rating' i.builder.id %}">Rating</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location = "{% url 'User:MyRequest' %}"
+</script>
+{% endif %}

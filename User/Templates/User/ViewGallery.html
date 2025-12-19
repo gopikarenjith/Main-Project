@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewGallery</title>
+</head>
+<body>
+    <table border="2">
+        <tr>
+            <td>SINO</td>
+            <td>File</td>
+        </tr>
+         {% for i in gallerydata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.work_file}}</td>
+        </tr>
+            {% endfor %}
+    </table>
+</body>
+</html>

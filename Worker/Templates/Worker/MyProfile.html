@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyProfile</title>
+
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="2">
+            <tr>
+                <td colspan="2"><img src="{{worker.worker_photo.url}}" width="150" alt=""></td>
+            </tr>
+            <tr>
+
+                <td>Name</td>
+                <td>{{worker.worker_name}}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{worker.worker_email}}</td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td>{{worker.worker_contact}}</td>
+            </tr>
+          
+            <tr>
+                <td>District</td>
+                <td>{{worker.place.district.district_name}}</td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td>{{worker.place.place_name}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><a href="{% url 'Worker:EditProfile' %}">Edit profile </a> | <a href="{% url 'Worker:ChangePassword' %}"> Change Password </a></td>
+                
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+</head>
+<body>
+    welcome {{worker.worker_name}}
+
+
+    <a href="{% url 'Worker:MyProfile' %}">MyProfile</a>
+    <a href="{% url 'Worker:Feedback' %}">Feedback</a>
+    <a href="{% url 'Worker:ViewAssign' %}">ViewAssign</a>
+</body>
+</html>

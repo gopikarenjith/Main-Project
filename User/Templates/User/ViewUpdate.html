@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewUpdate</title>
+</head>
+<body>
+    <table border="2 ">
+        <tr>
+            <td>SINO</td>
+            <td>Content</td>
+            <td>Date</td>
+        </tr>
+        {% for i in updatedata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.updates_content}}</td>
+            <td>{{i.updates_date}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewAssign</title>
+</head>
+<body>
+    <table border="2">
+        <tr>
+            <td>SINO</td>
+            <td>content</td>
+            <td>file</td>
+            <td>Date</td>
+            <td>UserDetails</td>
+            <td>Action</td>
+        </tr>
+        {% for i in assigndata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.request.request_content}}</td>
+            <td><a href="{{i.request.request_file.url}}">View File</a></td>
+            <td>{{i.request.request_date}}</td>
+            <td>{{i.request.user.user_name}}<br>
+            {{i.request.user.user_email}}<br>
+            {{i.request.user.user_contact}}<br>
+            {{i.request.user.user_address}}<br>
+            </td>
+            <td>
+                {% if i.assign_status == 0 %} 
+                <a href="{% url 'Worker:UpdateAssign' i.id 1 %}">Start</a>
+                {% elif i.assign_status == 1 %} 
+                <a href="{% url 'Worker:Updates' i.id %}">Updates</a>
+                <a href="{% url 'Worker:UpdateAssign' i.id 2 %}">End</a>
+                {% elif i.assign_status == 2 %}Ended
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+</body>
+</html>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location="{% url 'Worker:ViewAssign' %}"
+</script>
+{% endif %}

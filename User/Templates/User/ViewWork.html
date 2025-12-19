@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewWork.html</title>
+</head>
+<body>
+    <table border="2">
+        <tr>
+            <td>SINO</td>
+            <td>Title</td>
+            <td>Details</td>
+            <td>Photo</td>
+        </tr>
+         {% for i in viewworkdata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.work_title}}</td>
+            <td>{{i.work_details}}</td>
+            <td><img src="{{i.work_photo.url}}" width="150" alt=""></td>
+            <td><a href="{% url 'User:ViewGallery' i.id %}">viewGallery</a></td>
+        </tr>
+         {% endfor %}
+    </table>
+</body>
+</html>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+      window.location="{% url 'User:ViewWork' %}"
+    </script>
+{% endif %}

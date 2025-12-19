@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuilderVerification</title>
+</head>
+<body>
+    {% csrf_token %}
+    <table border="2">
+        <tr>
+            <td>SINO</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Contact</td>
+            <td>Address</td>
+            <td>logo</td>
+            <td>License</td>
+            <td>District</td>
+            <td>Place</td>
+            <td>doj</td>
+            <td>Action</td>
+        </tr>
+         {% for i in buildersverificationdata %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.builders_name}}</td>
+            <td>{{i.builders_email}}</td>
+            <td>{{i.builders_contact}}</td>
+            <td>{{i.builders_address}}</td>
+            <td><img src="{{i.builders_logo.url}}" width="150" alt=""></td>
+            <td><img src="{{i.builders_license.url}}" width="150" alt=""></td>
+             <td>{{i.builders_doj}}</td>
+            <td>{{i.place.district.district_name}}</td>
+            <td>{{i.place.place_name}}</td>
+            <td><a href="{% url 'Admin:Accept' i.id %}">Accept</a>
+            <a href="{% url 'Admin:Reject' i.id %}">Reject</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% if msg %}
+<script>
+    alert("{{msg}}")
+    window.location="{% url 'Admin:BuildersVerification' %}"
+</script>
+{% endif %}

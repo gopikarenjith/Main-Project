@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+</head>
+<body>
+    welcome {{builders.builders_name}}
+
+
+    <a href="{% url 'Builder:MyProfile' %}">MyProfile</a>
+    <a href="{% url 'Builder:WorkerRegistration' %}">WorkerRegistration</a>
+    <a href="{% url 'Builder:Feedback' %}">Feedback</a>
+    <a href="{% url 'Builder:ViewRequest' %}">ViewRequest</a>
+    <a href="{% url 'Builder:Work' %}">Work</a>
+
+</body>
+</html>
