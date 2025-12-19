@@ -9,8 +9,12 @@ def District(request):
     districtDatas=tbl_district.objects.all()
     if request.method=="POST":
        districtname=request.POST.get('txt_districtname')
-       tbl_district.objects.create(district_name=districtname)
-       return render(request,'Admin/District.html',{'msg':'Inserted successfully'})
+       checkdistrict=tbl_district.objects.filter(district_name=districtname).count()
+       if checkdistrict > 0:
+           return render(request,'Admin/District.html',{'msg':'District Already Existed '})
+       else:
+            tbl_district.objects.create(district_name=districtname)
+            return render(request,'Admin/District.html',{'msg':'Inserted successfully'})
     else:
         return render(request,'Admin/District.html',{'districtDatas':districtDatas})
 
