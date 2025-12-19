@@ -17,6 +17,8 @@ def EditProfile(request):
         name=request.POST.get("txt_name")
         email=request.POST.get("txt_email")
         contact=request.POST.get("txt_contact")
+
+        
         workerdata.worker_name=name
         workerdata.worker_email=email
         workerdata.worker_contact=contact

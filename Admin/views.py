@@ -24,9 +24,13 @@ def DeleteDistrict(request,did):
 def EditDistrict(request,eid):
     districtOne=tbl_district.objects.get(id=eid)
     if request.method=="POST":
-        districtOne.district_name=request.POST.get("txt_districtname")
-        districtOne.save()
-        return render(request,'Admin/District.html',{'msg':'Edited successfully'})
+        checkdistrict=tbl_district.objects.filter(district_name=request.POST.get("txt_districtname")).count()
+        if checkdistrict > 0:
+           return render(request,'Admin/District.html',{'msg':'District Already Existed '})
+        else:
+            districtOne.district_name=request.POST.get("txt_districtname")
+            districtOne.save()
+            return render(request,'Admin/District.html',{'msg':'Edited successfully'})
     else:
         return render(request,'Admin/District.html',{'districtOne':districtOne})   
 
@@ -116,6 +120,8 @@ def AdminRegistration(request):
         name=request.POST.get("txt_name")
         email=request.POST.get("txt_email")
         password=request.POST.get("txt_password")
+
+
         tbl_admin.objects.create(admin_name=name,admin_email=email,admin_password=password)
         return render(request,"Admin/AdminRegistration.html",{'msg':'Inserted successfully' })
     else:
@@ -147,6 +153,8 @@ def WorkType(request):
     worktypedata=tbl_worktype.objects.all()
     if request.method=="POST":
         worktype=request.POST.get("txt_worktype")
+
+
         tbl_worktype.objects.create(worktype_name=worktype)
         return render(request,'Admin/WorkType.html',{'msg':'inserted successfully'})
     else:
@@ -160,6 +168,8 @@ def WorkerType(request):
     workertypedata=tbl_workertype.objects.all()
     if request.method == "POST":
         workertype=request.POST.get("txt_workertype")
+
+        
         tbl_workertype.objects.create(workertype_name=workertype)
         return render(request,'Admin/WorkerType.html',{'msg':'inserted successfully'})
     else:

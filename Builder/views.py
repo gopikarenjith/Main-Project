@@ -20,6 +20,8 @@ def EditProfile(request):
        email=request.POST.get("txt_email") 
        contact=request.POST.get("txt_contact")
        address=request.POST.get("txt_address")
+
+
        builderdata.builders_name=name
        builderdata.builders_email=email
        builderdata.builders_contact=contact
@@ -62,6 +64,8 @@ def WorkerRegistration(request):
         photo=request.FILES.get("file_photo")
         password=request.POST.get("txt_password")
         repassword=request.POST.get("txt_repassword")
+
+
         if password==repassword:
             tbl_worker.objects.create(worker_name=name,worker_email=email,workertype=workertype,worker_photo=photo,worker_password=password,place=place, worker_contact=contact,builder=builder)
             return render(request,"Builder/WorkerRegistration.html",{'msg':"Registration Successfully"})
@@ -77,6 +81,8 @@ def Work(request):
         title=request.POST.get("txt_title")
         details=request.POST.get("txt_details")
         photo=request.FILES.get("file_photo")
+
+        
         tbl_work.objects.create(work_title=title,work_details=details,work_photo=photo,builder=builder)
         return render(request,'Builder/Work.html',{'msg':'Workadd successfully'})
     else:
