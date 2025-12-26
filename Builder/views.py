@@ -16,20 +16,22 @@ def MyProfile(request):
 def EditProfile(request):
     builderdata=tbl_builders.objects.get(id=request.session['bid'])
     if request.method == "POST":
-       name=request.POST.get("txt_name")
-       email=request.POST.get("txt_email") 
-       contact=request.POST.get("txt_contact")
-       address=request.POST.get("txt_address")
-
-
-       builderdata.builders_name=name
-       builderdata.builders_email=email
-       builderdata.builders_contact=contact
-       builderdata.builders_address=address
-       builderdata.save()
-       return render(request,'Builder/EditProfile.html',{"msg":"Profile Updateed.."}) 
+        name=request.POST.get("txt_name")
+        email=request.POST.get("txt_email") 
+        contact=request.POST.get("txt_contact")
+        address=request.POST.get("txt_address")
+        checkprofile=tbl_builders.objects.filter(builder_email=email).count()
+        if checkprofile > 0:
+            return render(request,'Builder/EditProfile.html',{'msg':'Email Already Existed '})
+        else:
+            builderdata.builders_name=name
+            builderdata.builders_email=email
+            builderdata.builders_contact=contact
+            builderdata.builders_address=address
+            builderdata.save()
+            return render(request,'Builder/EditProfile.html',{"msg":"Profile Updateed.."}) 
     else:
-       return render(request,"Builder/EditProfile.html",{'builders':builderdata})
+        return render(request,"Builder/EditProfile.html",{'builders':builderdata})
 
 def ChangePassword(request):
     builderdata=tbl_builders.objects.get(id=request.session['bid'])
@@ -59,18 +61,21 @@ def WorkerRegistration(request):
         contact=request.POST.get("txt_contact")
         place=tbl_place.objects.get(id=request.POST.get("sel_place"))
         builder=tbl_builders.objects.get(id=request.session['bid'])
-
+        
         workertype=tbl_workertype.objects.get(id=request.POST.get("sel_workertype"))
         photo=request.FILES.get("file_photo")
         password=request.POST.get("txt_password")
         repassword=request.POST.get("txt_repassword")
-
-
-        if password==repassword:
-            tbl_worker.objects.create(worker_name=name,worker_email=email,workertype=workertype,worker_photo=photo,worker_password=password,place=place, worker_contact=contact,builder=builder)
-            return render(request,"Builder/WorkerRegistration.html",{'msg':"Registration Successfully"})
+        checkworkerregistration=tbl_worker.objects.filter(worker_name=name,worker_email=email,workertype=workertype,worker_photo=photo,worker_password=password,place=place, worker_contact=contact,builder=builder).count()
+        if checkworkeregistration > 0:
+           return render(request,'Builder/WorkerRegistration.html',{'msg':'Workerregistration Already Existed '})
         else:
-            return render(request,"Builder/WorkerRegistration.html",{'msg':"password mismatch"})
+
+            if password==repassword:
+               tbl_worker.objects.create(worker_name=name,worker_email=email,workertype=workertype,worker_photo=photo,worker_password=password,place=place, worker_contact=contact,builder=builder)
+               return render(request,"Builder/WorkerRegistration.html",{'msg':"Registration Successfully"})
+            else:
+                return render(request,"Builder/WorkerRegistration.html",{'msg':"password mismatch"})
     else:
         return render(request,'Builder/WorkerRegistration.html',{"districtDatas":districtDatas,"workertypedata":workertypedata})
 
@@ -81,10 +86,13 @@ def Work(request):
         title=request.POST.get("txt_title")
         details=request.POST.get("txt_details")
         photo=request.FILES.get("file_photo")
-
+        checkwork=tbl_work.objects.filter(work_title=title,work_details=details,work_photo=photo,builder=builder).count()
+        if checkwork > 0:
+           return render(request,'Builder/Work.html',{'msg':'Work Already Existed '})
+        else:
         
-        tbl_work.objects.create(work_title=title,work_details=details,work_photo=photo,builder=builder)
-        return render(request,'Builder/Work.html',{'msg':'Workadd successfully'})
+            tbl_work.objects.create(work_title=title,work_details=details,work_photo=photo,builder=builder)
+            return render(request,'Builder/Work.html',{'msg':'Workadd successfully'})
     else:
         return render(request,'Builder/Work.html',{'workdata':workdata})
 

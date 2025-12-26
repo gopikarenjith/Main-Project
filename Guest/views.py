@@ -19,13 +19,16 @@ def UserRegistration(request):
         place=tbl_place.objects.get(id=request.POST.get("sel_place"))
         password=request.POST.get("txt_password")
         repassword=request.POST.get("txt_repassword")
-
-        
-        if password==repassword:
-            tbl_user.objects.create(user_name=name,user_email=email,user_contact=contact,user_address=address,user_gender=gender,user_dob=dob,user_photo=photo,user_password=password,place=place)
-            return render(request,"Guest/UserRegistration.html",{'msg':"Registration Successfully"})
+        checkuserregistration=tbl_user.objects.filter(user_email=email).count()
+        if checkuserregistration > 0:
+           return render(request,'Guest/UsererRegistration(.html',{'msg':'Email is Already Existed '})
         else:
-            return render(request,"Guest/UserRegistration.html",{'msg':"password mismatch"})
+        
+            if password==repassword:
+                tbl_user.objects.create(user_name=name,user_email=email,user_contact=contact,user_address=address,user_gender=gender,user_dob=dob,user_photo=photo,user_password=password,place=place)
+                return render(request,"Guest/UserRegistration.html",{'msg':"Registration Successfully"})
+            else:
+                return render(request,"Guest/UserRegistration.html",{'msg':"password mismatch"})
     else:
         return render(request,'Guest/UserRegistration.html',{'districtDatas':districtDatas})
 
@@ -80,13 +83,15 @@ def BuilderRegistration(request):
         license=request.FILES.get("file_license")
         password=request.POST.get("txt_password")
         repassword=request.POST.get("txt_repassword")
-
-
-        if password==repassword:
-            tbl_builders.objects.create(builders_name=name,builders_email=email,builders_contact=contact,builders_address=address,builders_logo=logo,builders_license=license,builders_password=password,place=place)
-            return render(request,"Guest/BuilderRegistration.html",{"msg":"Registration successfully"})
+        checkbuilderregistration=tbl_builders.objects.filter(builders_email=email).count()
+        if checkbuilderregistration > 0:
+           return render(request,'Guest/BuilderRegistration(.html',{'msg':'Email is Already Existed '})
         else:
-            return render(request,"Guest/BuilderRegistration.html",{"msg":"password mismatch"}) 
+            if password==repassword:
+                tbl_builders.objects.create(builders_name=name,builders_email=email,builders_contact=contact,builders_address=address,builders_logo=logo,builders_license=license,builders_password=password,place=place)
+                return render(request,"Guest/BuilderRegistration.html",{"msg":"Registration successfully"})
+            else:
+              return render(request,"Guest/BuilderRegistration.html",{"msg":"password mismatch"}) 
     else:
         return render(request,"Guest/BuilderRegistration.html",{"districtDatas":districtDatas})
 

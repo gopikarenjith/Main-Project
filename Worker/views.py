@@ -17,13 +17,16 @@ def EditProfile(request):
         name=request.POST.get("txt_name")
         email=request.POST.get("txt_email")
         contact=request.POST.get("txt_contact")
-
+        checkprofile=tbl_worker.objects.filter(worker_email=email).count()
+        if checkprofile > 0:
+            return render(request,'User/EditProfile.html',{'msg':'Email Already Existed '})
+        else:
         
-        workerdata.worker_name=name
-        workerdata.worker_email=email
-        workerdata.worker_contact=contact
-        workerdata.save()
-        return render(request,'Worker/EditProfile.html',{"msg":"Profile Updateed.."}) 
+            workerdata.worker_name=name
+            workerdata.worker_email=email
+            workerdata.worker_contact=contact
+            workerdata.save()
+            return render(request,'Worker/EditProfile.html',{"msg":"Profile Updateed.."}) 
     else:
        return render(request,"Worker/EditProfile.html",{'worker':workerdata})
  

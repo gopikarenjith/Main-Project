@@ -120,9 +120,9 @@ def AdminRegistration(request):
         name=request.POST.get("txt_name")
         email=request.POST.get("txt_email")
         password=request.POST.get("txt_password")
-        checkadminregistration=tbl_admin.objects.filter(admin_name=adminname).count()
+        checkadminregistration=tbl_admin.objects.filter(admin_email=email).count()
         if checkadminregistration > 0:
-           return render(request,'Admin/AdminRegistration.html',{'msg':'AdminRegistration Already Existed '})
+           return render(request,'Admin/AdminRegistration.html',{'msg':'Email is Already Existed '})
         else:
            tbl_admin.objects.create(admin_name=name,admin_email=email,admin_password=password)
            return render(request,"Admin/AdminRegistration.html",{'msg':'Inserted successfully' })
@@ -157,7 +157,7 @@ def WorkType(request):
         worktype=request.POST.get("txt_worktype")
         checkworktype=tbl_worktype.objects.filter(worktype_name=worktype).count()
         if checkworktype > 0:
-           return render(request,'Admin/WorkType.html',{'msg':'WorkType Already Existed '})
+           return render(request,'Admin/WorkType.html',{'msg':'worktype is Already Existed '})
         else:
 
             tbl_worktype.objects.create(worktype_name=worktype)
@@ -177,8 +177,6 @@ def WorkerType(request):
         if checkworkertype > 0:
            return render(request,'Admin/WorkerType.html',{'msg':'WorkerType Already Existed '})
         else:
-
-        
             tbl_workertype.objects.create(workertype_name=workertype)
             return render(request,'Admin/WorkerType.html',{'msg':'inserted successfully'})
     else:
