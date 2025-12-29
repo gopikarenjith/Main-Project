@@ -4,24 +4,180 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Lottie Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+
+    <style>
+        /* --- Unique Login Page Styles --- */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fef7f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .unique-login-container {
+            display: flex;
+            flex-direction: row;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(255,136,0,0.3);
+            overflow: hidden;
+            max-width: 900px;
+            width: 95%;
+            animation: fadeIn 0.7s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .login-lottie {
+            width: 50%;
+            background: #fff3e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-lottie #lottie-login {
+            width: 300px;
+            height: 300px;
+        }
+
+        .login-form-box {
+            width: 50%;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-form-box h2 {
+            color: #ff6600;
+            margin-bottom: 30px;
+            font-size: 28px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .login-form-box table {
+            width: 100%;
+        }
+
+        .login-form-box td {
+            padding: 12px 0;
+        }
+
+        .login-form-box input[type="email"],
+        .login-form-box input[type="text"],
+        .login-form-box input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #ff8800;
+            border-radius: 8px;
+            outline: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .login-form-box input[type="email"]:focus,
+        .login-form-box input[type="text"]:focus,
+        .login-form-box input[type="password"]:focus {
+            border-color: #ff5500;
+            box-shadow: 0 0 8px rgba(255,136,0,0.4);
+        }
+
+        .login-form-box input[type="submit"] {
+            background: #ff6600;
+            color: #fff;
+            padding: 12px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .login-form-box input[type="submit"]:hover {
+            background: #e65c00;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .unique-login-container {
+                flex-direction: column;
+            }
+
+            .login-lottie,
+            .login-form-box {
+                width: 100%;
+            }
+
+            .login-lottie {
+                padding: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <form action="" method="post">
-        {% csrf_token %}
-        <table  border="2">
-            <tr>
-                <td>Email</td>
-                <td><input type="email" required name="txt_email" /></td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><input type="text" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required name="txt_password" /></td>
-            </tr>
-            <tr>
-                <td colspan="2"align ="center"><input type="submit" value="Login"></td>
-                <td></td>
-            </tr>
-        </table>
-    </form>
+
+<div class="unique-login-container">
+    <!-- Lottie Animation -->
+    <div class="login-lottie">
+        <div id="lottie-login"></div>
+    </div>
+
+    <!-- Login Form -->
+    <div class="login-form-box">
+        <h2>Login</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" required name="txt_email" placeholder="Enter your email"/></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>
+                        <input type="text" required name="txt_password" placeholder="Enter your password"
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                               title="Must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Login">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<!-- Lottie Script -->
+ 
+<script>
+    var animation = lottie.loadAnimation({
+        container: document.getElementById('lottie-login'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'https://assets7.lottiefiles.com/packages/lf20_tfb3estd.json' // You can replace this with any Lottie URL
+    });
+</script>
+
 </body>
 </html>

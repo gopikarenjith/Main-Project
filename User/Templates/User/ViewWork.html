@@ -3,100 +3,104 @@
 
 <br><br><br><br><br><br>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViewWork.html</title>
+<style>
+/* Unique class wrapper */
+.vw-container {
+    width: 90%;
+    margin: auto;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
 
-    <style>
-        /* Unique class wrapper */
-        .vw-container {
-            width: 90%;
-            margin: auto;
-            font-family: Arial, sans-serif;
-        }
+/* Heading styling */
+.vw-heading {
+    font-size: 28px;
+    font-weight: 700;
+    color: orange;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-        .vw-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: #fff7f0;
-            box-shadow: 0 0 8px rgba(0,0,0,0.2);
-        }
+/* Table styling */
+.vw-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #fff7f0;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
 
-        .vw-table th {
-            background: orange;
-            color: white;
-            padding: 12px;
-            font-size: 18px;
-            text-align: center;
-        }
+.vw-table th {
+    background: orange;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    text-align: center;
+}
 
-        .vw-table td {
-            padding: 12px;
-            text-align: center;
-            border: 1px solid #ffb86c;
-            font-size: 16px;
-        }
+.vw-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ffb86c;
+    font-size: 16px;
+}
 
-        .vw-table tr:hover {
-            background: #ffedd6;
-            transition: 0.3s;
-        }
+.vw-table tr:hover {
+    background: #ffedd6;
+    transition: 0.3s;
+}
 
-        .vw-img {
-            border-radius: 6px;
-            border: 2px solid orange;
-        }
+.vw-img {
+    border-radius: 6px;
+    border: 2px solid orange;
+}
 
-        .vw-link {
-            padding: 6px 14px;
-            background: orange;
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+.vw-link {
+    padding: 6px 14px;
+    background: orange;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-        .vw-link:hover {
-            background: #ff7b00;
-        }
-    </style>
+.vw-link:hover {
+    background: #ff7b00;
+}
+</style>
 
-</head>
+<div class="vw-container">
 
-<body>
-    <div class="vw-container">
-        <table class="vw-table">
-            <tr>
-                <th>SINO</th>
-                <th>Title</th>
-                <th>Details</th>
-                <th>Photo</th>
-                <th>Action</th>
-            </tr>
+    <!-- Page Heading -->
+    <div class="vw-heading">View Work</div>
 
-            {% for i in viewworkdata %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ i.work_title }}</td>
-                <td>{{ i.work_details }}</td>
-                <td>
-                    <img src="{{ i.work_photo.url }}" width="150" class="vw-img">
-                </td>
-                <td>
-                    <a class="vw-link" href="{% url 'User:ViewGallery' i.id %}">
-                        View Gallery
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-</body>
-</html>
+    <table class="vw-table">
+        <tr>
+            <th>SINO</th>
+            <th>Title</th>
+            <th>Details</th>
+            <th>Photo</th>
+            <th>Action</th>
+        </tr>
+
+        {% for i in viewworkdata %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.work_title }}</td>
+            <td>{{ i.work_details }}</td>
+            <td>
+                <img src="{{ i.work_photo.url }}" width="150" class="vw-img">
+            </td>
+            <td>
+                <a class="vw-link" href="{% url 'User:ViewGallery' i.id %}">
+                    View Gallery
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 
 {% if msg %}
 <script>
@@ -106,3 +110,4 @@
 {% endif %}
 
 {% endblock %}
+

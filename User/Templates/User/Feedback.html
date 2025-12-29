@@ -7,15 +7,16 @@
     .feedback-page-container{
         width: 500px;
         margin: auto;
-        font-family: Arial, sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
 
+    /* Modern Static Border */
     .feedback-box{
         background: #fff7f0;
         padding: 25px;
-        border-radius: 10px;
-        border: 2px solid #ff8800;
-        box-shadow: 0 0 10px rgba(255,136,0,0.3);
+        border-radius: 12px;
+        border: 3px solid #ff8800; /* modern orange border */
+        box-shadow: 0 6px 15px rgba(255,136,0,0.3); /* subtle shadow */
     }
 
     .feedback-title{
@@ -45,6 +46,7 @@
         border: 1px solid #ff8800;
         resize: none;
         font-size: 15px;
+        transition: 0.3s;
     }
 
     .feedback-input-textarea:focus{
@@ -108,3 +110,7 @@
 {% endif %}
 
 {% endblock %}
+
+
+
+

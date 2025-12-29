@@ -3,150 +3,147 @@
 
 <br><br><br><br><br><br>
 
-<!DOCTYPE html>
-<html lang="en">
+<style>
+/* ---------- UNIQUE CSS FOR MYREQUEST PAGE ---------- */
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyRequest</title>
+.mr-container {
+    width: 95%;
+    margin: auto;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
 
-    <style>
-        /* ---------- UNIQUE CSS FOR MYREQUEST PAGE ---------- */
+/* Heading */
+.mr-heading {
+    font-size: 28px;
+    font-weight: 700;
+    color: orange;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-        .mr-container {
-            width: 95%;
-            margin: auto;
-            font-family: Arial, sans-serif;
-        }
+/* Table styling */
+.mr-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff7f0;
+    margin-top: 20px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
 
-        .mr-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #fff7f0;
-            margin-top: 20px;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-        }
+.mr-table th {
+    background-color: orange;
+    color: white;
+    padding: 14px;
+    font-size: 17px;
+    text-align: center;
+}
 
-        .mr-table th {
-            background-color: orange;
-            color: white;
-            padding: 14px;
-            font-size: 17px;
-            text-align: center;
-        }
+.mr-table td {
+    padding: 12px;
+    border: 1px solid #ffbd77;
+    text-align: center;
+    font-size: 15px;
+}
 
-        .mr-table td {
-            padding: 12px;
-            border: 1px solid #ffbd77;
-            text-align: center;
-            font-size: 15px;
-        }
+.mr-table tr:hover {
+    background: #ffe1c2;
+    transition: 0.3s;
+}
 
-        .mr-table tr:hover {
-            background: #ffe1c2;
-            transition: 0.3s;
-        }
+.mr-btn {
+    background: orange;
+    padding: 6px 12px;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 3px;
+    display: inline-block;
+}
 
-        .mr-btn {
-            background: orange;
-            padding: 6px 12px;
-            color: white;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 3px;
-            display: inline-block;
-        }
+.mr-btn:hover {
+    background: #ff7a00;
+}
 
-        .mr-btn:hover {
-            background: #ff7a00;
-        }
+.mr-status-pending {
+    color: #d47d00;
+    font-weight: bold;
+}
 
-        .mr-status-pending {
-            color: #d47d00;
-            font-weight: bold;
-        }
+.mr-status-accepted {
+    color: green;
+    font-weight: bold;
+}
 
-        .mr-status-accepted {
-            color: green;
-            font-weight: bold;
-        }
+.mr-status-rejected {
+    color: red;
+    font-weight: bold;
+}
 
-        .mr-status-rejected {
-            color: red;
-            font-weight: bold;
-        }
+.mr-status-confirmed {
+    color: #0663c7;
+    font-weight: bold;
+}
+</style>
 
-        .mr-status-confirmed {
-            color: #0663c7;
-            font-weight: bold;
-        }
-    </style>
-</head>
+<div class="mr-container">
 
-<body>
-    <div class="mr-container">
+    <!-- Page Heading -->
+    <div class="mr-heading">My Request</div>
 
-        <table class="mr-table">
-            <tr>
-                <th>SINO</th>
-                <th>Content</th>
-                <th>File</th>
-                <th>Date</th>
-                <th>Builder Details</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
+    <table class="mr-table">
+        <tr>
+            <th>SINO</th>
+            <th>Content</th>
+            <th>File</th>
+            <th>Date</th>
+            <th>Builder Details</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
 
-            {% for i in reqdata %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ i.request_content }}</td>
-                <td>{{ i.request_file }}</td>
-                <td>{{ i.request_date }}</td>
+        {% for i in reqdata %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.request_content }}</td>
+            <td>{{ i.request_file }}</td>
+            <td>{{ i.request_date }}</td>
+            <td>
+                {{ i.builder.builders_name }}<br>
+                {{ i.builder.builders_email }}<br>
+                {{ i.builder.builders_contact }}<br>
+                {{ i.builder.builders_address }}
+            </td>
+            <td>{{ i.request_amount }}</td>
+            <td>
+                {% if i.request_status == 0 %}
+                    <span class="mr-status-pending">Pending</span>
 
-                <td>
-                    {{ i.builder.builders_name }}<br>
-                    {{ i.builder.builders_email }}<br>
-                    {{ i.builder.builders_contact }}<br>
-                    {{ i.builder.builders_address }}
-                </td>
+                {% elif i.request_status == 1 %}
+                    <span class="mr-status-accepted">Accepted</span><br>
+                    <a class="mr-btn" href="{% url 'User:Accept' i.id %}">Accept</a>
+                    <a class="mr-btn" href="{% url 'User:Reject' i.id %}">Reject</a>
 
-                <td>{{ i.request_amount }}</td>
+                {% elif i.request_status == 3 %}
+                    <span class="mr-status-confirmed">Confirmed</span><br>
+                    <a class="mr-btn" href="{% url 'User:Payment' i.id %}">Advance Payment</a>
 
-                <td>
-                    {% if i.request_status == 0 %}
-                        <span class="mr-status-pending">Pending</span>
+                {% elif i.request_status == 2 %}
+                    <span class="mr-status-rejected">Rejected</span>
+                {% endif %}
+            </td>
+            <td>
+                <a class="mr-btn" href="{% url 'User:ViewUpdate' i.id %}">View Update</a>
+                <a class="mr-btn" href="{% url 'User:rating' i.builder.id %}">Rating</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 
-                    {% elif i.request_status == 1 %}
-                        <span class="mr-status-accepted">Accepted</span><br>
-                        <a class="mr-btn" href="{% url 'User:Accept' i.id %}">Accept</a>
-                        <a class="mr-btn" href="{% url 'User:Reject' i.id %}">Reject</a>
-
-                    {% elif i.request_status == 3 %}
-                        <span class="mr-status-confirmed">Confirmed</span><br>
-                        <a class="mr-btn" href="{% url 'User:Payment' i.id %}">Advance Payment</a>
-
-                    {% elif i.request_status == 2 %}
-                        <span class="mr-status-rejected">Rejected</span>
-
-                    {% endif %}
-                </td>
-
-                <td>
-                    <a class="mr-btn" href="{% url 'User:ViewUpdate' i.id %}">View Update</a>
-                    <a class="mr-btn" href="{% url 'User:rating' i.builder.id %}">Rating</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-
-    </div>
-</body>
-
-</html>
+</div>
 
 {% if msg %}
 <script>
@@ -156,3 +153,4 @@
 {% endif %}
 
 {% endblock %}
+

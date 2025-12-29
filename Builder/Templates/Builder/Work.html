@@ -9,6 +9,18 @@
         color: #333;
     }
 
+    /* Page Heading */
+    .modern-work-heading {
+        text-align: center;
+        font-size: 28px;
+        font-weight: 700;
+        color: #ff8800;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-family: "Poppins", sans-serif;
+    }
+
     /* Form Styling */
     .modern-work-form {
         background: #fff7ef;
@@ -140,6 +152,10 @@
 </style>
 
 <div class="modern-work-container">
+
+    <!-- Page Heading -->
+    <div class="modern-work-heading">Work</div>
+
     <!-- Form -->
     <form action="" method="post" enctype="multipart/form-data" class="modern-work-form">
         {% csrf_token %}
@@ -202,4 +218,5 @@
 {% endif %}
 
 {% endblock %}
+
 
