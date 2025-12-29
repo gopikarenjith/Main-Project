@@ -210,7 +210,10 @@ def Feedback(request):
 
 def HomePage(request):
     admindata=tbl_admin.objects.get(id=request.session['aid'])
-    return render(request,"Admin/HomePage.html",{' admindata': admindata})
+    user = tbl_user.objects.all().count()
+    builder=tbl_builders.objects.all().count()
+    worker=tbl_worker.objects.all().count()
+    return render(request,"Admin/HomePage.html",{' admindata': admindata,'userdata':user,'builderdata':builder,'workerdata':worker})
 
 
 
