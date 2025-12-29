@@ -1,31 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViewWorkers</title>
-</head>
-<body>
-    <table border="2">
+{% extends 'Builder/Header.html' %}
+{% block content %}
+<br><br><br><br><br><br>
+
+<style>
+    .vw-container {
+        width: 95%;
+        margin: auto;
+        font-family: "Poppins", sans-serif;
+    }
+
+    .vw-select-table, .vw-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background: #fff;
+        box-shadow: 0px 3px 15px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .vw-select-table td {
+        padding: 12px;
+    }
+
+    .vw-table th {
+        background: #ff7b00;
+        color: white;
+        padding: 14px;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .vw-table td {
+        padding: 12px;
+        font-size: 15px;
+        border-bottom: 1px solid #ffe0c2;
+        text-align: center;
+    }
+
+    .vw-table tr:nth-child(even) {
+        background: #fff7ef;
+    }
+
+    .vw-table tr:hover {
+        background: #ffe0c2;
+        transition: 0.3s;
+    }
+
+    select#sel_workertype {
+        padding: 6px 10px;
+        border-radius: 6px;
+        border: 1px solid #ff7b00;
+        background: #fff7ef;
+        font-size: 14px;
+    }
+
+    .vw-btn {
+        padding: 6px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        color: white;
+        font-weight: 500;
+        background: #ff7b00;
+        transition: 0.3s;
+    }
+
+    .vw-btn:hover {
+        background: #e66a00;
+    }
+
+    img.worker-photo {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+</style>
+
+<div class="vw-container">
+    <table class="vw-select-table">
         <tr>
-            <td>WokerType</td>
-            <td><select name="sel_workertype"  required id="sel_workertype">
-                <option value="">---select---</option>
-                {% for i in workertypedata %}
-                <option value="{{i.id}}">{{i.workertype_name}}</option>
-                {% endfor %}
-            </select></td>
+            <td>Worker Type</td>
+            <td>
+                <select name="sel_workertype" required id="sel_workertype">
+                    <option value="">---select---</option>
+                    {% for i in workertypedata %}
+                        <option value="{{i.id}}">{{i.workertype_name}}</option>
+                    {% endfor %}
+                </select>
+            </td>
         </tr>
     </table>
-    <table border="2">
+
+    <table class="vw-table">
         <tr>
-            <td>SINO</td>
-            <td>Name</td>
-            <td>Email</td>
-            <td>Contact</td>
-            <td>Photo</td>
-            <td>Type</td>
-            <td>Action</td>
+            <th>SINO</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Photo</th>
+            <th>Type</th>
+            <th>Action</th>
         </tr>
         {% for i in viewworkersdata %}
         <tr>
@@ -33,18 +109,27 @@
             <td>{{i.worker_name}}</td>
             <td>{{i.worker_email}}</td>
             <td>{{i.worker_contact}}</td>
-            <td>{{i.worker_photo}}</td>
+            <td>
+                {% if i.worker_photo %}
+                    <img src="{{ i.worker_photo.url }}" alt="photo" class="worker-photo">
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
             <td>{{i.workertype}}</td>
-            <td><a href="{%url 'Builder:assign' i.id rid %}">Assign</a>
+            <td>
+                <a class="vw-btn" href="{% url 'Builder:assign' i.id rid %}">Assign</a>
             </td>
         </tr>
         {% endfor %}
     </table>
-</body>
-</html>
+</div>
+
 {% if msg %}
 <script>
     alert("{{msg}}")
     window.location="{% url 'Builder:ViewWorkers' rid %}"
 </script>
 {% endif %}
+
+{% endblock %}

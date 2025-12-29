@@ -1,3 +1,7 @@
+{% extends 'Builder/Header.html' %}
+{% block content %}
+<br><br><br><br><br><br>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,44 +9,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyProfile</title>
 
-</head>
-<body>
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table border="2">
-            <tr>
-                <td colspan="2"><img src="{{builders.builders_logo.url}}" width="150" alt=""></td>
-            </tr>
-            <tr>
+    <style>
+        /* --- Modern Glass Card With Orange Border --- */
+        .modern-profile-wrapper {
+            width: 500px;
+            margin: auto;
+            padding: 30px;
+            background: rgba(255, 248, 235, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
 
-                <td>Name</td>
-                <td>{{builders.builders_name}}</td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td>{{builders.builders_email}}</td>
-            </tr>
-            <tr>
-                <td>Contact</td>
-                <td>{{builders.builders_contact}}</td>
-            </tr>
-            <tr>
-                <td>Address</td>
-                <td>{{builders.builders_address}}</td>
-            </tr>
-            <tr>
-                <td>District</td>
-                <td>{{builders.place.district.district_name}}</td>
-            </tr>
-            <tr>
-                <td>Place</td>
-                <td>{{builders.place.place_name}}</td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><a href="{% url 'Builder:EditProfile' %}">Edit profile </a> | <a href="{% url 'Builder:ChangePassword' %}"> Change Password </a></td>
-                
-            </tr>
-        </table>
-    </form>
+            /* 🔥 Modern Premium Orange Border */
+            border: 3px solid #ff8800;
+
+            /* Shadow for 3D effect */
+            box-shadow: 0px 12px 35px rgba(255, 136, 0, 0.35);
+
+            font-family: "Poppins", sans-serif;
+            animation: fadeIn 0.7s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Heading --- */
+        .modern-profile-heading {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: #ff8800;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .modern-profile-photo-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modern-profile-photo-box img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ff8800;
+            box-shadow: 0px 6px 20px rgba(255, 136, 0, 0.45);
+        }
+
+        .modern-profile-table {
+            width: 100%;
+        }
+
+        .modern-profile-table td {
+            padding: 12px 6px;
+            font-size: 16px;
+        }
+
+        .modern-label {
+            font-weight: 600;
+            color: #d35400;
+            width: 35%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        .modern-value {
+            color: #444;
+            font-size: 16px;
+        }
+
+        .modern-buttons {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .modern-buttons a {
+            padding: 10px 18px;
+            background: linear-gradient(45deg, #ffa600, #ff7600);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 0px 5px;
+            box-shadow: 0px 6px 18px rgba(255, 136, 0, 0.5);
+            transition: 0.3s ease;
+        }
+
+        .modern-buttons a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 12px 30px rgba(255, 136, 0, 0.65);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="modern-profile-wrapper">
+
+    <!-- Heading -->
+    <div class="modern-profile-heading">My Profile</div>
+
+    <div class="modern-profile-photo-box">
+        <img src="{{builders.builders_logo.url}}" alt="Profile Photo">
+    </div>
+
+    <table class="modern-profile-table">
+        <tr>
+            <td class="modern-label">Name</td>
+            <td class="modern-value">{{builders.builders_name}}</td>
+        </tr>
+
+        <tr>
+            <td class="modern-label">Email</td>
+            <td class="modern-value">{{builders.builders_email}}</td>
+        </tr>
+
+        <tr>
+            <td class="modern-label">Contact</td>
+            <td class="modern-value">{{builders.builders_contact}}</td>
+        </tr>
+
+        <tr>
+            <td class="modern-label">Address</td>
+            <td class="modern-value">{{builders.builders_address}}</td>
+        </tr>
+
+        <tr>
+            <td class="modern-label">District</td>
+            <td class="modern-value">{{builders.place.district.district_name}}</td>
+        </tr>
+
+        <tr>
+            <td class="modern-label">Place</td>
+            <td class="modern-value">{{builders.place.place_name}}</td>
+        </tr>
+    </table>
+
+    <div class="modern-buttons">
+        <a href="{% url 'Builder:EditProfile' %}">Edit Profile</a>
+        <a href="{% url 'Builder:ChangePassword' %}">Change Password</a>
+    </div>
+
+</div>
+
 </body>
 </html>
+
+{% endblock %}
+
+
+
+
+

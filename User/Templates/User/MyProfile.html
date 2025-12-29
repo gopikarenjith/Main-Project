@@ -1,48 +1,145 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyProfile</title>
+{% extends 'User/Header.html' %}
+{% block content %}
 
-</head>
-<body>
-    <form action="" method="post">
-        {% csrf_token %}
-        <table border="2">
-            <tr>
-                <td colspan="2"><img src="{{user.user_photo.url}}" width="150" alt=""></td>
-            </tr>
-            <tr>
+<style>
+/* --- UNIQUE PROFILE PAGE CSS --- */
 
-                <td>Name</td>
-                <td>{{user.user_name}}</td>
+.user-profile-container {
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px;
+}
+
+.profile-card {
+    width: 450px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    animation: fadeIn 0.6s ease-in-out;
+    border-top: 5px solid #ff6600;
+}
+
+.profile-photo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-photo img {
+    width: 150px;
+    height: 150px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid #ff6600;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.profile-table th {
+    width: 40%;
+    padding: 12px;
+    background: #f7f7f7;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+}
+
+.profile-table td {
+    padding: 12px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    color: #444;
+}
+
+.profile-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-btn {
+    padding: 10px 20px;
+    background: #ff6600;
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 8px;
+    margin: 5px;
+    display: inline-block;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+.profile-btn:hover {
+    background: #cc5200;
+    transform: translateY(-2px);
+}
+
+.profile-btn.secondary {
+    background: #444;
+}
+
+.profile-btn.secondary:hover {
+    background: #000;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+
+
+<!-- My Profile Section -->
+<div class="user-profile-container">
+
+    <div class="profile-card">
+
+        <!-- Profile Photo -->
+        <div class="profile-photo">
+            <img src="{{ user.user_photo.url }}" alt="Profile Photo">
+        </div>
+
+        <!-- Profile Table -->
+        <table class="profile-table">
+            <tr>
+                <th>Name</th>
+                <td>{{ user.user_name }}</td>
             </tr>
             <tr>
-                <td>Email</td>
-                <td>{{user.user_email}}</td>
+                <th>Email</th>
+                <td>{{ user.user_email }}</td>
             </tr>
             <tr>
-                <td>Contact</td>
-                <td>{{user.user_contact}}</td>
+                <th>Contact</th>
+                <td>{{ user.user_contact }}</td>
             </tr>
             <tr>
-                <td>Address</td>
-                <td>{{user.user_address}}</td>
+                <th>Address</th>
+                <td>{{ user.user_address }}</td>
             </tr>
             <tr>
-                <td>District</td>
-                <td>{{user.place.district.district_name}}</td>
+                <th>District</th>
+                <td>{{ user.place.district.district_name }}</td>
             </tr>
             <tr>
-                <td>Place</td>
-                <td>{{user.place.place_name}}</td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><a href="{% url 'User:EditProfile' %}">Edit profile </a> | <a href="{% url 'User:ChangePassword' %}"> Change Password </a></td>
-                
+                <th>Place</th>
+                <td>{{ user.place.place_name }}</td>
             </tr>
         </table>
-    </form>
-</body>
-</html>
+
+        <!-- Buttons -->
+        <div class="profile-actions">
+            <a class="profile-btn" href="{% url 'User:EditProfile' %}">Edit Profile</a>
+            <a class="profile-btn secondary" href="{% url 'User:ChangePassword' %}">Change Password</a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

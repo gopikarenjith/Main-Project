@@ -1,47 +1,158 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViewAssign</title>
-</head>
-<body>
-    <table border="2">
-        <tr>
-            <td>SINO</td>
-            <td>content</td>
-            <td>file</td>
-            <td>Date</td>
-            <td>UserDetails</td>
-            <td>Action</td>
-        </tr>
-        {% for i in assigndata %}
-        <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{i.request.request_content}}</td>
-            <td><a href="{{i.request.request_file.url}}">View File</a></td>
-            <td>{{i.request.request_date}}</td>
-            <td>{{i.request.user.user_name}}<br>
-            {{i.request.user.user_email}}<br>
-            {{i.request.user.user_contact}}<br>
-            {{i.request.user.user_address}}<br>
-            </td>
-            <td>
-                {% if i.assign_status == 0 %} 
-                <a href="{% url 'Worker:UpdateAssign' i.id 1 %}">Start</a>
-                {% elif i.assign_status == 1 %} 
-                <a href="{% url 'Worker:Updates' i.id %}">Updates</a>
-                <a href="{% url 'Worker:UpdateAssign' i.id 2 %}">End</a>
-                {% elif i.assign_status == 2 %}Ended
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-</body>
-</html>
+{% extends 'Worker/Header.html' %}
+{% block content %}
+
+<style>
+    /* PAGE WRAPPER */
+    .viewassign-page {
+        width: 90%;
+        margin: auto;
+        padding: 50px 20px;
+    }
+
+    /* CARD */
+    .viewassign-card {
+        background: #fff;
+        border-radius: 18px;
+        padding: 25px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        border: 2px solid #f39c12; /* Orange border */
+        overflow-x: auto;
+    }
+
+    /* CARD HEADING */
+    .viewassign-heading {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #f39c12;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* TABLE */
+    .viewassign-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-family: Arial, sans-serif;
+    }
+
+    .viewassign-table th, 
+    .viewassign-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #eee;
+        font-size: 15px;
+        color: #333;
+    }
+
+    .viewassign-table th {
+        background: #f39c12;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+    }
+
+    .viewassign-table tr:hover {
+        background: rgba(243, 156, 18, 0.1);
+    }
+
+    /* FILE LINK */
+    .view-file-link {
+        color: #f39c12;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .view-file-link:hover {
+        text-decoration: underline;
+        color: #d35400;
+    }
+
+    /* ACTION BUTTONS */
+    .assign-btn {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #f39c12;
+        color: white !important;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+        margin: 2px 4px;
+        transition: 0.3s;
+    }
+
+    .assign-btn:hover {
+        background: #d35400;
+        color: white !important;
+    }
+
+    /* RESPONSIVE */
+    @media screen and (max-width: 768px) {
+        .viewassign-table th, .viewassign-table td {
+            font-size: 14px;
+            padding: 10px 8px;
+        }
+    }
+</style>
+
+<br><br><br><br>
+
+<div class="viewassign-page">
+    <div class="viewassign-card">
+        <!-- HEADING -->
+        <div class="viewassign-heading">Assigned Work</div>
+
+        <table class="viewassign-table">
+            <thead>
+                <tr>
+                    <th>SINO</th>
+                    <th>Content</th>
+                    <th>File</th>
+                    <th>Date</th>
+                    <th>User Details</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in assigndata %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.request.request_content}}</td>
+                    <td><a href="{{i.request.request_file.url}}" class="view-file-link">View File</a></td>
+                    <td>{{i.request.request_date}}</td>
+                    <td>
+                        {{i.request.user.user_name}}<br>
+                        {{i.request.user.user_email}}<br>
+                        {{i.request.user.user_contact}}<br>
+                        {{i.request.user.user_address}}<br>
+                    </td>
+                    <td>
+                        {% if i.assign_status == 0 %} 
+                            <a href="{% url 'Worker:UpdateAssign' i.id 1 %}" class="assign-btn">Start</a>
+                        {% elif i.assign_status == 1 %} 
+                            <a href="{% url 'Worker:Updates' i.id %}" class="assign-btn">Updates</a>
+                            <a href="{% url 'Worker:UpdateAssign' i.id 2 %}" class="assign-btn">End</a>
+                        {% elif i.assign_status == 2 %}
+                            Ended
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
 {% if msg %}
 <script>
-    alert("{{msg}}")
-    window.location="{% url 'Worker:ViewAssign' %}"
+    alert("{{msg}}");
+    window.location="{% url 'Worker:ViewAssign' %}";
 </script>
 {% endif %}
+
+{% endblock %}
+

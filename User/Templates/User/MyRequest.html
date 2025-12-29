@@ -1,3 +1,8 @@
+{% extends 'User/Header.html' %}
+{% block content %}
+
+<br><br><br><br><br><br>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,60 +10,149 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyRequest</title>
+
+    <style>
+        /* ---------- UNIQUE CSS FOR MYREQUEST PAGE ---------- */
+
+        .mr-container {
+            width: 95%;
+            margin: auto;
+            font-family: Arial, sans-serif;
+        }
+
+        .mr-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff7f0;
+            margin-top: 20px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .mr-table th {
+            background-color: orange;
+            color: white;
+            padding: 14px;
+            font-size: 17px;
+            text-align: center;
+        }
+
+        .mr-table td {
+            padding: 12px;
+            border: 1px solid #ffbd77;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .mr-table tr:hover {
+            background: #ffe1c2;
+            transition: 0.3s;
+        }
+
+        .mr-btn {
+            background: orange;
+            padding: 6px 12px;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 3px;
+            display: inline-block;
+        }
+
+        .mr-btn:hover {
+            background: #ff7a00;
+        }
+
+        .mr-status-pending {
+            color: #d47d00;
+            font-weight: bold;
+        }
+
+        .mr-status-accepted {
+            color: green;
+            font-weight: bold;
+        }
+
+        .mr-status-rejected {
+            color: red;
+            font-weight: bold;
+        }
+
+        .mr-status-confirmed {
+            color: #0663c7;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-    <table border="2">
-        <tr>
-            <td>SINO</td>
-            <td>Content</td>
-            <td>File</td>
-            <td>Date</td>
-            <td>BuilderDetails</td>
-            <td>Amount</td>
-            <td>Status</td>
-            <td>Action</td>
-        </tr>
-        {% for i in reqdata %}
-        <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{i.request_content}}</td>
-            <td>{{i.request_file}}</td>
-            <td>{{i.request_date}}</td>
-            <td>{{i.builder.builders_name}}<br>
-                {{i.builder.builders_email}}<br>
-                {{i.builder.builders_contact}}<br>
-                {{i.builder.builders_address}}<br>
-            </td>
-            <td>{{i.request_amount}}</td>
-            <td>
-                {% if i.request_status == 0 %}
-                pending
+    <div class="mr-container">
 
-                {% elif i.request_status == 1 %}
-                Accept
-                <a href="{% url 'User:Accept' i.id %}">Accept</a>
-                <a href="{% url 'User:Reject' i.id %}">Reject</a>
-                {% elif i.request_status == 3 %}
-                Confirmed | 
-                <a href="{% url 'User:Payment' i.id %}">Advance Payment</a>
-                {% elif i.request_status == 2 %} Rejected
-                {% endif %}<br>
+        <table class="mr-table">
+            <tr>
+                <th>SINO</th>
+                <th>Content</th>
+                <th>File</th>
+                <th>Date</th>
+                <th>Builder Details</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
 
+            {% for i in reqdata %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.request_content }}</td>
+                <td>{{ i.request_file }}</td>
+                <td>{{ i.request_date }}</td>
 
-            </td>
-            <td><a href="{% url 'User:ViewUpdate' i.id %}">View Update</a>
-                <a href="{% url 'User:rating' i.builder.id %}">Rating</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+                <td>
+                    {{ i.builder.builders_name }}<br>
+                    {{ i.builder.builders_email }}<br>
+                    {{ i.builder.builders_contact }}<br>
+                    {{ i.builder.builders_address }}
+                </td>
+
+                <td>{{ i.request_amount }}</td>
+
+                <td>
+                    {% if i.request_status == 0 %}
+                        <span class="mr-status-pending">Pending</span>
+
+                    {% elif i.request_status == 1 %}
+                        <span class="mr-status-accepted">Accepted</span><br>
+                        <a class="mr-btn" href="{% url 'User:Accept' i.id %}">Accept</a>
+                        <a class="mr-btn" href="{% url 'User:Reject' i.id %}">Reject</a>
+
+                    {% elif i.request_status == 3 %}
+                        <span class="mr-status-confirmed">Confirmed</span><br>
+                        <a class="mr-btn" href="{% url 'User:Payment' i.id %}">Advance Payment</a>
+
+                    {% elif i.request_status == 2 %}
+                        <span class="mr-status-rejected">Rejected</span>
+
+                    {% endif %}
+                </td>
+
+                <td>
+                    <a class="mr-btn" href="{% url 'User:ViewUpdate' i.id %}">View Update</a>
+                    <a class="mr-btn" href="{% url 'User:rating' i.builder.id %}">Rating</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
 </body>
 
 </html>
+
 {% if msg %}
 <script>
-    alert("{{msg}}")
-    window.location = "{% url 'User:MyRequest' %}"
+    alert("{{msg}}");
+    window.location = "{% url 'User:MyRequest' %}";
 </script>
 {% endif %}
+
+{% endblock %}

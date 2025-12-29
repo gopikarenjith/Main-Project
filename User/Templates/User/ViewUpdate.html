@@ -1,24 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViewUpdate</title>
-</head>
-<body>
-    <table border="2 ">
+{% extends 'User/Header.html' %}
+{% block content %}
+<br><br><br><br><br><br>
+
+<style>
+    /* UNIQUE CLASS FOR VIEW UPDATE PAGE */
+    .vu-container * {
+        font-family: Arial, sans-serif;
+    }
+
+    .vu-container {
+        width: 80%;
+        margin: auto;
+        padding-bottom: 40px;
+    }
+
+    .vu-title {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        color: #ff6600;
+        margin-bottom: 25px;
+    }
+
+    .vu-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fffdf6;
+        box-shadow: 0 0 12px rgba(255, 102, 0, 0.3);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .vu-table th {
+        background: #ff8800;
+        color: white;
+        text-align: center;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .vu-table td {
+        padding: 12px;
+        background: white;
+        border-bottom: 1px solid #ffd8b0;
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .vu-table tr:hover td {
+        background: #fff4e5;
+        transition: 0.3s;
+    }
+</style>
+
+<div class="vu-container">
+
+    <h2 class="vu-title">Latest Updates</h2>
+
+    <table class="vu-table">
         <tr>
-            <td>SINO</td>
-            <td>Content</td>
-            <td>Date</td>
+            <th>SINO</th>
+            <th>Content</th>
+            <th>Date</th>
         </tr>
+
         {% for i in updatedata %}
         <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{i.updates_content}}</td>
-            <td>{{i.updates_date}}</td>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.updates_content }}</td>
+            <td>{{ i.updates_date }}</td>
         </tr>
         {% endfor %}
     </table>
-</body>
-</html>
+
+</div>
+
+{% endblock %}

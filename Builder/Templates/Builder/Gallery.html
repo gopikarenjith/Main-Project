@@ -1,43 +1,140 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery</title>
-</head>
-<body>
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table border="2">
+{% extends 'Builder/Header.html' %}
+{% block content %}
+
+<style>
+/* Container for the gallery page */
+.gallery-page-container {
+    max-width: 800px;
+    margin: 80px auto;
+    font-family: 'Poppins', sans-serif;
+    border: 3px solid #ff7b00; /* Single orange border */
+    border-radius: 15px;
+    padding: 30px;
+    background-color: #fff7ef; /* Light orange background */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* Upload form styling */
+.gallery-upload-card {
+    margin-bottom: 30px;
+}
+
+/* Table inside upload form */
+.gallery-upload-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Table cells */
+.gallery-upload-card td {
+    padding: 12px 10px;
+}
+
+/* Input and file upload styling */
+.gallery-input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 2px solid #ff7b00;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.gallery-input:focus {
+    border-color: #e66a00;
+    box-shadow: 0 0 6px rgba(255,123,0,0.5);
+}
+
+/* Submit button styling */
+.gallery-submit-btn {
+    padding: 10px 25px;
+    background-color: #ff7b00;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.gallery-submit-btn:hover {
+    background-color: #fff;
+    color: #ff7b00;
+    border: 2px solid #e66a00;
+}
+
+/* Gallery list table styling */
+.gallery-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.gallery-list-table th,
+.gallery-list-table td {
+    padding: 12px;
+    text-align: center;
+}
+
+.gallery-list-table th {
+    background-color: #ff7b00;
+    color: #fff;
+}
+
+/* Remove cell borders and rely on the single container border */
+.gallery-list-table td, 
+.gallery-list-table th {
+    border: none;
+}
+</style>
+
+<div class="gallery-page-container">
+
+    <!-- Upload Form Card -->
+    <div class="gallery-upload-card">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>File</td>
+                    <td><input type="file" name="file_gallery" required accept="image/*" class="gallery-input"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Submit" class="gallery-submit-btn">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <!-- Gallery List Table -->
+    <table class="gallery-list-table">
         <tr>
-            <td>file</td>
-            <td><input type="file" name="file_gallery" required accept="image/*" id="file_gallery"></td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center"><input type="submit" value="submit"></td>
-    
-        </tr>
-    </table>
-    </form>
-    <table border="2">
-        <tr>
-            <td>SINO</td>
-            <td>Gallery</td>
-            <td>Action</td>
+            <th>SINO</th>
+            <th>Gallery</th>
+            <th>Action</th>
         </tr>
         {% for i in gallerydata %}
         <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{i.work_file}}</td>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.work_file }}</td>
             <td></td>
         </tr>
         {% endfor %}
     </table>
-</body>
-</html>
+
+</div>
+
 {% if msg %}
 <script>
-    alert("{{msg}}")
-      window.location="{% url 'Builder:Work' %}"
-    </script>
+    alert("{{ msg }}");
+    window.location = "{% url 'Builder:Work' %}";
+</script>
 {% endif %}
+
+{% endblock %}
+
+
+

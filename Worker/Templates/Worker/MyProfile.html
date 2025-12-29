@@ -1,45 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyProfile</title>
+{% extends 'Worker/Header.html' %}
+{% block content %}
 
-</head>
-<body>
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table border="2">
-            <tr>
-                <td colspan="2"><img src="{{worker.worker_photo.url}}" width="150" alt=""></td>
-            </tr>
-            <tr>
+<style>
+    /* OUTER PAGE WRAPPER */
+    .worker-page-border {
+        width: 80%;
+        margin: auto;
+        padding: 40px 30px;
+        display: flex;
+        justify-content: center;
+    }
 
-                <td>Name</td>
-                <td>{{worker.worker_name}}</td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td>{{worker.worker_email}}</td>
-            </tr>
-            <tr>
-                <td>Contact</td>
-                <td>{{worker.worker_contact}}</td>
-            </tr>
-          
-            <tr>
-                <td>District</td>
-                <td>{{worker.place.district.district_name}}</td>
-            </tr>
-            <tr>
-                <td>Place</td>
-                <td>{{worker.place.place_name}}</td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><a href="{% url 'Worker:EditProfile' %}">Edit profile </a> | <a href="{% url 'Worker:ChangePassword' %}"> Change Password </a></td>
-                
-            </tr>
-        </table>
-    </form>
-</body>
-</html>
+    /* PROFILE CARD WITH ANIMATED NEON BORDER */
+    .worker-profile-card {
+        width: 520px;
+        background: #fff; /* Solid white background */
+        padding: 30px;
+        border-radius: 20px;
+        position: relative;
+        text-align: center;
+        color: #333;
+        overflow: hidden;
+    }
+
+    /* Neon Animated Outer Border */
+    .worker-profile-card::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, #f39c12, #e74c3c, #8e44ad, #3498db, #1abc9c, #f39c12);
+        background-size: 400% 400%;
+        border-radius: 22px;
+        z-index: -1;
+        animation: neonGlow 20s linear infinite;
+    }
+
+    @keyframes neonGlow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Inner card with solid orange border */
+    .worker-profile-inner {
+        background: #fff; /* White background */
+        border-radius: 18px;
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+        border: 2px solid #f39c12; /* Single orange border */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    /* HEADING INSIDE CARD */
+    .worker-card-heading {
+        font-size: 28px;
+        font-weight: bold;
+        color: #f39c12;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        text-shadow: 0 0 8px #f39c12, 0 0 15px #f39c12;
+    }
+
+    /* CIRCLE PROFILE PHOTO */
+    .worker-profile-photo {
+        width: 160px;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #f39c12;
+        margin-bottom: 20px;
+    }
+
+    /* DETAILS TABLE */
+    .worker-details-table {
+        width: 100%;
+        margin-top: 10px;
+        border-collapse: collapse;
+    }
+
+    .worker-details-table td {
+        padding: 12px 5px;
+        font-size: 17px;
+        color: #333;
+        font-weight: 500;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+    }
+
+    .worker-details-table td:nth-child(1) {
+        font-weight: bold;
+        width: 40%;
+    }
+
+    /* ORANGE BUTTON STYLE */
+    .worker-btn {
+        display: inline-block;
+        padding: 10px 22px;
+        background: #f39c12;
+        color: white !important;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: bold;
+        text-decoration: none;
+        margin: 5px 10px;
+        transition: 0.3s;
+    }
+
+    .worker-btn:hover {
+        background: #d35400;
+        color: white !important;
+    }
+</style>
+
+<br><br><br><br>
+
+<div class="worker-page-border">
+
+    <div class="worker-profile-card">
+
+        <div class="worker-profile-inner">
+
+            <!-- CARD HEADING -->
+            <div class="worker-card-heading">My Profile</div>
+
+            <!-- CIRCLE PHOTO -->
+            <img src="{{worker.worker_photo.url}}" class="worker-profile-photo" alt="Profile Photo">
+
+            <!-- DETAILS TABLE -->
+            <table class="worker-details-table">
+                <tr>
+                    <td>Name</td>
+                    <td>{{worker.worker_name}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{worker.worker_email}}</td>
+                </tr>
+                <tr>
+                    <td>Contact</td>
+                    <td>{{worker.worker_contact}}</td>
+                </tr>
+                <tr>
+                    <td>District</td>
+                    <td>{{worker.place.district.district_name}}</td>
+                </tr>
+                <tr>
+                    <td>Place</td>
+                    <td>{{worker.place.place_name}}</td>
+                </tr>
+            </table>
+
+            <!-- BUTTONS -->
+            <div style="margin-top: 20px;">
+                <a href="{% url 'Worker:EditProfile' %}" class="worker-btn">Edit Profile</a>
+                <a href="{% url 'Worker:ChangePassword' %}" class="worker-btn">Change Password</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+

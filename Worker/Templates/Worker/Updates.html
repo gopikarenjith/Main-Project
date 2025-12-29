@@ -1,42 +1,172 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update</title>
-</head>
-<body><form action="" method="post">
-    {% csrf_token %}
-    <table border="2">
-        <tr>
-            <td>Content</td>
-            <td><textarea name="txt_content" required id="txt_cntent"></textarea></td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center"><input type="submit" value="submit"></td>
-            
-        </tr>
-    </table>
-    </form>
-    <table border="2">
-        <tr>
-            <td>SINO</td>
-            <td>Updates</td>
-            <td>Date</td>
-        </tr>
-        {% for i in updatesdate %}
-        <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{i.updates_content}}</td>
-            <td>{{i.updates_date}}</td>
-        </tr>
-        {% endfor %}
-    </table>
-</body>
-</html>
+{% extends 'Worker/Header.html' %}
+{% block content %}
+
+<style>
+    /* PAGE WRAPPER */
+    .updates-page {
+        width: 85%;
+        margin: auto;
+        padding: 50px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* CARD */
+    .updates-card {
+        width: 100%;
+        max-width: 700px;
+        background: #fff;
+        border-radius: 18px;
+        padding: 25px 30px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        border: 2px solid #f39c12; /* Orange border */
+        margin-bottom: 30px;
+    }
+
+    /* HEADING */
+    .updates-heading {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #f39c12;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* FORM */
+    .updates-form table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .updates-form td {
+        padding: 10px 5px;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .updates-form textarea {
+        width: 100%;
+        height: 80px;
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        resize: vertical;
+    }
+
+    .updates-form input[type="submit"] {
+        background: #f39c12;
+        color: #fff;
+        padding: 10px 22px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 5px;
+    }
+
+    .updates-form input[type="submit"]:hover {
+        background: #d35400;
+    }
+
+    /* TABLE OF UPDATES */
+    .updates-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    .updates-table th,
+    .updates-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+        font-size: 15px;
+    }
+
+    .updates-table th {
+        background: #f39c12;
+        color: #fff;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .updates-table tr:hover {
+        background: rgba(243, 156, 18, 0.1);
+    }
+
+    /* RESPONSIVE */
+    @media screen and (max-width: 768px) {
+        .updates-card {
+            padding: 20px;
+        }
+
+        .updates-form td {
+            font-size: 14px;
+        }
+
+        .updates-table th,
+        .updates-table td {
+            font-size: 14px;
+            padding: 10px 8px;
+        }
+    }
+</style>
+
+<div class="updates-page">
+    <!-- FORM CARD -->
+    <div class="updates-card updates-form">
+        <div class="updates-heading">Add Update</div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Content</td>
+                    <td><textarea name="txt_content" required id="txt_content"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Submit">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <!-- UPDATES TABLE CARD -->
+    <div class="updates-card">
+        <div class="updates-heading">Updates History</div>
+        <table class="updates-table">
+            <thead>
+                <tr>
+                    <th>SINO</th>
+                    <th>Updates</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in updatesdate %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.updates_content}}</td>
+                    <td>{{i.updates_date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
 {% if msg %}
 <script>
-    alert("{{msg}}")
-    window.location="{% url 'Worker:ViewAssign' %}"
+    alert("{{msg}}");
+    window.location="{% url 'Worker:ViewAssign' %}";
 </script>
 {% endif %}
+
+{% endblock %}

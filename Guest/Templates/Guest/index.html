@@ -73,33 +73,33 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="project.html">Projects</a></li>
-                                            <li><a href="services.html">Services</a></li>
-                                            <li><a href="blog.html">Blog</a>
-                                                <ul class="submenu">
+                                            <li><a href="{% url 'Guest:index' %}">Home</a></li>
+                                            <li><a href="{% url 'Guest:Login' %}">Login</a></li>
+                                            <li><a href="{% url 'Guest:BuilderRegistration' %}">BuilderRegistration</a></li>
+                                            <li><a href="{% url 'Guest:UserRegistration' %}">UserRegistration</a></li>
+                                            <!-- <li><a href="{% url 'Builder:WorkerRegistration' %}">WorkerRegistration</a> -->
+                                                <!-- <ul class="submenu">
                                                     <li><a href="blog.html">Blog</a></li>
                                                     <li><a href="single-blog.html">Blog Details</a></li>
-                                                </ul>
+                                                </ul> -->
                                             </li>
-                                            <li><a href="#">Pages</a>
+                                            <!-- <li><a href="#">Pages</a>
                                                 <ul class="submenu">
                                                     <li><a href="elements.html">Element</a></li>
                                                     <li><a href="project_details.html">Projects Details</a></li>
                                                     <li><a href="services_details.html">Services Details</a></li>
                                                 </ul>
-                                            </li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            </li> -->
+                                            <!-- <li><a href="contact.html">Contact</a></li> -->
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
-                            <div class="col-xl-2 col-lg-2 col-md-3">
+                            <!-- <div class="col-xl-2 col-lg-2 col-md-3">
                                 <div class="header-right-btn f-right d-none d-lg-block">
                                     <a href="#" class="btn">Contact Now</a>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- Mobile Menu -->
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-lg-none"></div>
@@ -183,6 +183,8 @@
                             <div class="service-img">
                                 <img src="{% static 'Main/assets/img/service/servicess1.png' %}" alt="">
                             </div>
+                            
+                            
                             <!-- <div class="service-cap">
                                 <h4><a href="services_details.html">Engineering techniques & implementation</a></h4>
                                 <a href="services_details.html" class="more-btn">Read More <i class="ti-plus"></i></a>
@@ -199,21 +201,44 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="single-service-cap mb-30">
                             <div class="service-img">
                                 <img src="{% static 'Main/assets/img/service/servicess3.png' %}" alt="">
                             </div>
-                            <!-- <div class="service-cap">
-                                <h4><a href="services_details.htmlaa">Engineering techniques &  implementation</a></h4>
-                                <a href="services_details.html" class="more-btn">Read More <i class="ti-plus"></i></a>
-                            </div> -->
-                            <!-- <div class="service-icon">
-                                <img src="{% static 'Main/assets/img/icon/services_icon1.png' %}" alt="">
-                            </div> -->
+                            
                         </div>
                     </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="single-service-cap mb-30">
+                            <div class="service-img">
+                                <img src="{% static 'Main/assets/img/build3.jpg' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="single-service-cap mb-30">
+                            <div class="service-img">
+                                <img src="{% static 'Main/assets/img/build4.jpg' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="single-service-cap mb-30">
+                            <div class="service-img">
+                                <img src="{% static 'Main/assets/img/build2.jpg' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="single-service-cap mb-30">
+                            <div class="service-img">
+                                <img src="{% static 'Main/assets/img/service/servicess3.png' %}" alt="">
+                            </div>
+                            
+                        </div>
+                    </div> -->
                 </div>
             </div>
         </div>

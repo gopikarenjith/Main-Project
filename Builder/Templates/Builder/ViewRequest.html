@@ -1,52 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'Builder/Header.html' %}
+{% block content %}
+<br><br><br><br><br><br>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViewRequest</title>
-</head>
+<style>
+    .vr-container {
+        width: 95%;
+        margin: auto;
+        font-family: "Poppins", sans-serif;
+    }
 
-<body>
-    <table border="2">
+    .vr-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background: #fff;
+        box-shadow: 0px 3px 15px rgba(0,0,0,0.15);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .vr-table th {
+        background: #ff7b00;
+        color: white;
+        padding: 14px;
+        font-size: 17px;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+    }
+
+    .vr-table td {
+        padding: 12px;
+        font-size: 15px;
+        border-bottom: 1px solid #ffe0c2;
+    }
+
+    .vr-table tr:nth-child(even) {
+        background: #fff7ef;
+    }
+
+    .vr-table tr:hover {
+        background: #ffe0c2;
+        transition: 0.3s;
+    }
+
+    /* Buttons */
+    .vr-btn {
+        padding: 6px 14px;
+        border-radius: 6px;
+        text-decoration: none;
+        color: white;
+        font-weight: 500;
+        margin-right: 5px;
+    }
+    .vr-accept { background: #ff7b00; }
+    .vr-reject { background: #d00000; }
+    .vr-view { background: #0066cc; }
+
+    .vr-status {
+        font-weight: bold;
+        color: #444;
+    }
+</style>
+
+<div class="vr-container">
+    <table class="vr-table">
         <tr>
-            <td>SINO</td>
-            <td>content</td>
-            <td>file</td>
-            <td>Date</td>
-            <td>UserDetails</td>
-            <td>Action</td>
+            <th>SINO</th>
+            <th>Content</th>
+            <th>File</th>
+            <th>Date</th>
+            <th>User Details</th>
+            <th>Action</th>
         </tr>
+
         {% for i in viewreqdata %}
         <tr>
             <td>{{forloop.counter}}</td>
             <td>{{i.request_content}}</td>
             <td>{{i.request_file}}</td>
             <td>{{i.request_date}}</td>
-            <td>{{i.user.user_name}}<br>
-                {{i.user.user_email}}<br>
-                {{i.user.user_contact}}<br>
-                {{i.user.user_address}}<br>
+            <td>
+                {{i.user.user_name}} <br>
+                {{i.user.user_email}} <br>
+                {{i.user.user_contact}} <br>
+                {{i.user.user_address}}
             </td>
             <td>
                 {% if i.request_status == 0 %}
-                <a href="{% url 'Builder:Amount' i.id %}">Accept</a>
-                <a href="{% url 'Builder:Reject' i.id %}">Reject</a>
-                {% elif i.request_status == 1 %} Accepted
+                    <a class="vr-btn vr-accept" href="{% url 'Builder:Amount' i.id %}">Accept</a>
+                    <a class="vr-btn vr-reject" href="{% url 'Builder:Reject' i.id %}">Reject</a>
+
+                {% elif i.request_status == 1 %}
+                    <span class="vr-status">Accepted</span>
+
                 {% elif i.request_status == 3 %}
-                <a href="{% url 'Builder:ViewWorkers' i.id  %}">ViewWorkers</a>
-                {% elif i.request_status == 2 %}Rejected
+                    <a class="vr-btn vr-view" href="{% url 'Builder:ViewWorkers' i.id %}">View Workers</a>
+
+                {% elif i.request_status == 2 %}
+                    <span class="vr-status">Rejected</span>
                 {% endif %}
             </td>
         </tr>
         {% endfor %}
     </table>
-</body>
+</div>
 
-</html>
 {% if msg %}
 <script>
     alert("{{msg}}")
     window.location = "{% url 'Builder:ViewRequest' %}"
 </script>
 {% endif %}
+
+{% endblock %}

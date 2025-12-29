@@ -1,30 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amount</title>
-</head>
-<body>
-    <form action="" method="post">
-    {% csrf_token %}
-    <table border="2">
-        <tr>
-            <td>Amount</td>
-            <td><input required type="text" name="txt_amount"  id="txt_amount"/></td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center"><input type="submit" value="submit"></td>
-            
-        </tr>
-    </table>
-    </form>
-    
-</body>
-</html>
+{% extends 'Builder/Header.html' %}
+{% block content %}
+
+<style>
+/* Container for centering */
+.amount-page-container {
+    max-width: 450px;
+    margin: 80px auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Card style */
+.amount-card {
+    border: 3px solid #ff7b00;  /* Orange border */
+    border-radius: 15px;
+    padding: 30px 25px;
+    background-color: #fff7ef;   /* Light orange background */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Table styling */
+.amount-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.amount-card td {
+    padding: 12px 0;
+    font-weight: 500;
+}
+
+/* Input styling */
+.amount-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ff7b00;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.amount-input:focus {
+    border-color: #e66a00;
+    box-shadow: 0 0 6px rgba(255,123,0,0.5);
+}
+
+/* Submit button */
+.amount-submit-btn {
+    padding: 10px 25px;
+    background-color: #ff7b00;
+    color: #fff;
+    border: 2px solid #ff7b00;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.amount-submit-btn:hover {
+    background-color: #fff;
+    color: #ff7b00;
+    border-color: #e66a00;
+}
+
+/* Responsive for mobile */
+@media screen and (max-width: 480px) {
+    .amount-card td {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .amount-submit-btn {
+        width: 100%;
+        padding: 12px;
+    }
+}
+</style>
+
+<div class="amount-page-container">
+    <div class="amount-card">
+        <form action="" method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Amount</td>
+                    <td><input type="text" name="txt_amount" required class="amount-input"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Submit" class="amount-submit-btn">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
 {% if msg %}
 <script>
-    alert("{{msg}}")
-    window.location="{% url 'Builder:ViewRequest' %}"
+    alert("{{ msg }}");
+    window.location = "{% url 'Builder:ViewRequest' %}";
 </script>
 {% endif %}
+
+{% endblock %}
