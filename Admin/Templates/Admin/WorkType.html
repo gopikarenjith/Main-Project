@@ -1,42 +1,182 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'Admin/Header.html' %}
+{% block content %}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorkType</title>
+
 </head>
-<body>
-    <form action="" method="post">
-        {% csrf_token %}
-        <table border="2">
-            <tr>
-                <td>WorkType</td>
-                <td><input required type="text" name="txt_worktype" title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$"/></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center" ><input type="submit" value="submit"></td>
-            </tr>
+<div class="worktype-page container my-5">
+
+    <!-- ---------- FORM CARD ---------- -->
+    <div class="worktype-form-card mb-5">
+        <h2 class="worktype-title mb-4">Manage Work Type</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" 
+                   name="txt_worktype" 
+                   class="worktype-input"
+                   required
+                   title="Name Allows Only Alphabets, Spaces and First Letter Must Be Capital Letter"
+                   pattern="^[A-Z][a-zA-Z ]*$"
+                   placeholder="Enter Work Type">
+
+            <button type="submit" class="worktype-submit-btn">Submit</button>
+        </form>
+    </div>
+
+    <!-- ---------- TABLE ---------- -->
+    <div class="worktype-table-wrapper">
+        <table class="worktype-table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Work Type</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in worktypedata %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.worktype_name }}</td>
+                    <td class="worktype-action">
+                        <a href="{% url 'Admin:DeleteWorktype' i.id %}">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No work types available</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
-    </form>
-    <table border="2">
-        <tr>
-            <td>SINO</td>
-            <td>Worktype</td>
-            <td>Action</td>
-        </tr>
-        {% for i in worktypedata %}
-        <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{i.worktype_name}}</td>
-            <td><a href="{% url 'Admin:DeleteWorktype' i.id %}">Delete</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-</body>
+    </div>
+
+</div>
+
+<style>
+/* ---------- PAGE CONTAINER ---------- */
+.worktype-page {
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+}
+
+/* ---------- PAGE TITLE ---------- */
+.worktype-title {
+    color: #d72626; /* chilli red */
+    text-align: center;
+    font-weight: 700;
+}
+
+/* ---------- FORM CARD ---------- */
+.worktype-form-card {
+    width: 40%;
+    margin: auto;
+    background: #1e1e2d; /* dark card background */
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    border: 1px solid #3a3a4a;
+    text-align: center;
+}
+
+.worktype-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    background: #2a2a3b;
+    color: #fff;
+    font-size: 16px;
+}
+
+.worktype-submit-btn {
+    width: 100%;
+    padding: 10px;
+    background: #d72626; /* chilli red */
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.worktype-submit-btn:hover {
+    background: #a71d1d; /* darker chilli red hover */
+}
+
+/* ---------- TABLE WRAPPER ---------- */
+.worktype-table-wrapper {
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.worktype-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #1e1e2d;
+    color: #fff;
+}
+
+.worktype-table th {
+    background: #d72626; /* chilli red */
+    color: #fff;
+    padding: 12px;
+    text-transform: uppercase;
+}
+
+.worktype-table td {
+    padding: 12px;
+    border-bottom: 1px solid #333;
+    text-align: center;
+}
+
+.worktype-table tr:nth-child(even) {
+    background-color: #2a2a3b;
+}
+
+.worktype-table tr:hover {
+    background-color: #a71d1d; /* darker chilli red hover */
+}
+
+/* Action links */
+.worktype-action a {
+    color: #d72626;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.worktype-action a:hover {
+    color: #a71d1d;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .worktype-form-card {
+        width: 90%;
+    }
+    .worktype-table-wrapper {
+        width: 100%;
+    }
+    .worktype-table th,
+    .worktype-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+</style>
+
 {% if msg %}
 <script>
     alert("{{msg}}")
-      window.location="{% url 'Admin:WorkType' %}"
-    </script>
+    window.location="{% url 'Admin:WorkType' %}"
+</script>
 {% endif %}
-</html>
+
+{% endblock %}

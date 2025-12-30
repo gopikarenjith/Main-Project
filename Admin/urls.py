@@ -37,6 +37,8 @@ urlpatterns=[
       path('Reject/<int:rid>',views.Reject,name="Reject"),
       path('Feedback/',views.Feedback,name="Feedback"),
       path('HomePage/',views.HomePage,name="HomePage"),
+      path('Logout/',views.Logout,name="Logout"),
+
 
 
 

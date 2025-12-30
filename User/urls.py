@@ -24,6 +24,7 @@ urlpatterns = [
     path('Payment/<int:rid>',views.Payment,name="Payment"),
     path('Loader/',views.Loader,name="Loader"),
     path('Payment_suc/',views.Payment_suc,name="Payment_suc"),
+    path('Logout/',views.Logout,name="Logout"),
 
 
 

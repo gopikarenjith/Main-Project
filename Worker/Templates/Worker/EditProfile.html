@@ -1,142 +1,161 @@
 {% extends 'Worker/Header.html' %}
 {% block content %}
+<head>
+    <title>EditProfile</title>
 
+</head>
 <style>
-    /* PAGE WRAPPER */
-    .edit-profile-page {
-        width: 80%;
-        margin: auto;
-        padding: 50px 20px;
-        display: flex;
-        justify-content: center;
-    }
+/* ---- UNIQUE WORKER EDIT PROFILE CSS ---- */
 
-    /* CARD */
-    .edit-profile-card {
-        width: 480px;
-        background: #fff; /* White background */
-        padding: 30px 25px;
-        border-radius: 18px;
-        border: 2px solid #f39c12; /* Orange border */
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        text-align: center;
-    }
+.worker-edit-container {
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px;
+}
 
-    /* CARD HEADING */
-    .edit-profile-heading {
-        font-size: 26px;
-        font-weight: bold;
-        color: #f39c12;
-        margin-bottom: 25px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
+.worker-edit-card {
+    width: 450px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    border-top: 5px solid #f39c12; /* Orange top border */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    animation: fadeIn 0.6s ease-in-out;
+    text-align: center;
+}
 
-    /* FORM TABLE */
-    .edit-profile-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+/* Heading */
+.worker-edit-heading {
+    font-size: 28px;
+    font-weight: bold;
+    color: #f39c12;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+}
 
-    .edit-profile-table td {
-        padding: 12px 8px;
-        font-size: 16px;
-        color: #333;
-        text-align: left;
-    }
+/* Table styles */
+.worker-edit-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
 
-    .edit-profile-table input[type="text"],
-    .edit-profile-table input[type="email"] {
-        width: 100%;
-        padding: 10px 12px;
-        font-size: 15px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        outline: none;
-        transition: 0.3s;
-    }
+.worker-edit-table td {
+    padding: 12px;
+    font-size: 16px;
+    color: #333;
+    text-align: left;
+    font-weight: 500;
+}
 
-    .edit-profile-table input[type="text"]:focus,
-    .edit-profile-table input[type="email"]:focus {
-        border-color: #f39c12;
-        box-shadow: 0 0 8px rgba(243, 156, 18, 0.5);
-    }
+/* Input Fields */
+.worker-edit-table input[type="text"],
+.worker-edit-table input[type="email"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
 
-    /* BUTTON */
-    .edit-profile-btn {
-        padding: 10px 22px;
-        background: #f39c12;
-        color: white !important;
-        border-radius: 8px;
-        font-size: 15px;
-        font-weight: bold;
-        text-decoration: none;
-        border: none;
-        margin: 15px 6px 0px 0px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+.worker-edit-table input[type="text"]:focus,
+.worker-edit-table input[type="email"]:focus {
+    border-color: #f39c12;
+    box-shadow: 0 0 8px rgba(243, 156, 18, 0.4);
+}
 
-    .edit-profile-btn:hover {
-        background: #d35400;
-        color: white;
-    }
+/* Buttons */
+.worker-edit-btn {
+    padding: 10px 22px;
+    background: #f39c12;
+    color: white !important;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
 
-    /* CENTER BUTTON */
-    .edit-profile-button-wrapper {
-        text-align: center;
-    }
+.worker-edit-btn:hover {
+    background: #d35400;
+    transform: translateY(-2px);
+}
+
+/* Center Align Button */
+.worker-edit-btn-wrap {
+    text-align: center;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
 </style>
 
+<!-- Worker Edit Profile Section -->
 <br><br><br><br>
 
-<div class="edit-profile-page">
-    <div class="edit-profile-card">
+<div class="worker-edit-container">
 
-        <div class="edit-profile-heading">Edit Profile</div>
+    <div class="worker-edit-card">
 
-        <form action="" method="post">
+        <div class="worker-edit-heading">Edit Profile</div>
+
+        <form method="post">
             {% csrf_token %}
-            <table class="edit-profile-table">
+
+            <table class="worker-edit-table">
                 <tr>
                     <td>Name</td>
                     <td>
-                        <input type="text" required name="txt_name" 
-                               pattern="^[A-Z]+[a-zA-Z ]*$"
-                               title="Name allows only alphabets, spaces, and first letter must be capital" />
+                        <input type="text" name="txt_name" required
+                               value="{{ worker.worker_name }}"
+                               pattern="^[A-Z][a-zA-Z ]*$"
+                               title="First letter must be capital. Only alphabets & spaces allowed.">
                     </td>
                 </tr>
 
                 <tr>
                     <td>Email</td>
                     <td>
-                        <input type="email" required name="txt_email" />
+                        <input type="email" name="txt_email" required value="{{ worker.worker_email }}">
                     </td>
                 </tr>
 
                 <tr>
                     <td>Contact</td>
                     <td>
-                        <input type="text" required name="txt_contact" 
-                               pattern="[7-9]{1}[0-9]{9}" 
-                               title="Phone number must start with 7-9 and have 10 digits" />
+                        <input type="text" name="txt_contact" required
+                               value="{{ worker.worker_contact }}"
+                               pattern="[7-9]{1}[0-9]{9}"
+                               title="Must start with 7 / 8 / 9 and contain 10 digits.">
                     </td>
                 </tr>
             </table>
 
-            <div class="edit-profile-button-wrapper">
-                <input type="submit" class="edit-profile-btn" value="Update">
+            <div class="worker-edit-btn-wrap">
+                <button type="submit" class="worker-edit-btn">Update</button>
             </div>
+
         </form>
 
     </div>
+
 </div>
 
 {% if msg %}
 <script>
-    alert("{{msg}}");
-    window.location="{% url 'Worker:MyProfile' %}";
+    alert("{{ msg }}");
+    window.location = "{% url 'Worker:MyProfile' %}";
 </script>
 {% endif %}
 
 {% endblock %}
+

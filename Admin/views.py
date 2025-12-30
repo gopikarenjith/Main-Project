@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from Admin.models import *
 from Guest.models import *
 from User.models import *
@@ -215,6 +215,9 @@ def HomePage(request):
     worker=tbl_worker.objects.all().count()
     return render(request,"Admin/HomePage.html",{' admindata': admindata,'userdata':user,'builderdata':builder,'workerdata':worker})
 
+def Logout(request):
+    del request.session['aid']
+    return redirect('Guest:Login')
 
 
     

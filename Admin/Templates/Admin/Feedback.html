@@ -1,53 +1,143 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'Admin/Header.html' %}
+{% block content %}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback</title>
+
 </head>
-<body>
-    <table border="2">
-        <tr>
-            <td>SINO</td>
-            <td>User</td>
-            <td>Content</td>
-        </tr>
-        {% for i in userfeedback %}
-        <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{i.user.user_name}}</td>
-            <td>{{i.feedback_content}}</td>
-        </tr>
-        {% endfor %} 
-    </table>
-    <table border="2">
-        <tr>
-            <td>SINO</td>
-            <td>Builder</td>
-            <td>Content</td>
-        </tr>
-        {% for i in builderfeedback %}
-        <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{i.builder.builders_name}}</td>
-            <td>{{i.feedback_content}}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <table border="2">
-        <tr>
-            <td>SINO</td>
-            <td>Worker</td>
-            <td>Content</td>
-        </tr>
-        {% for i in workerfeedback %}
-        <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{i.worker.worker_name}}</td>
-            <td>{{i.feedback_content}}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    
-</body>
-</html>
+<style>
+/* ============================================
+   FEEDBACK PAGE — UNIQUE CLASS NAMES
+   THEME: DARK UI + BRIGHT RED HIGHLIGHTS
+   ============================================ */
+
+.feedback-page-wrapper {
+    width: 100%;
+    padding: 40px 20px;
+}
+
+.feedback-section-card {
+    width: 80%;
+    margin: 25px auto;
+    background: #1e1e2d;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #3a3a4a;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.feedback-section-title {
+    color: #FF0000;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* ---------- TABLE ---------- */
+.feedback-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #28293d;
+    border-radius: 10px;
+    overflow: hidden;
+    color: white;
+}
+
+.feedback-table th {
+    background: #111827;
+    padding: 12px;
+    color: #FF0000;
+    font-size: 16px;
+    text-align: center;
+}
+
+.feedback-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #3a3a4a;
+}
+
+.feedback-table tr:hover {
+    background: #2f3045;
+    transition: 0.3s;
+}
+
+</style>
+
+
+<div class="feedback-page-wrapper">
+
+    <!-- ==========================================================
+         USER FEEDBACK SECTION
+    =========================================================== -->
+    <div class="feedback-section-card">
+        <div class="feedback-section-title">User Feedback</div>
+
+        <table class="feedback-table">
+            <tr>
+                <th>SI NO</th>
+                <th>User</th>
+                <th>Content</th>
+            </tr>
+
+            {% for i in userfeedback %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.user.user_name}}</td>
+                <td>{{i.feedback_content}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <!-- ==========================================================
+         BUILDER FEEDBACK SECTION
+    =========================================================== -->
+    <div class="feedback-section-card">
+        <div class="feedback-section-title">Builder Feedback</div>
+
+        <table class="feedback-table">
+            <tr>
+                <th>SI NO</th>
+                <th>Builder</th>
+                <th>Content</th>
+            </tr>
+
+            {% for i in builderfeedback %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.builder.builders_name}}</td>
+                <td>{{i.feedback_content}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <!-- ==========================================================
+         WORKER FEEDBACK SECTION
+    =========================================================== -->
+    <div class="feedback-section-card">
+        <div class="feedback-section-title">Worker Feedback</div>
+
+        <table class="feedback-table">
+            <tr>
+                <th>SI NO</th>
+                <th>Worker</th>
+                <th>Content</th>
+            </tr>
+
+            {% for i in workerfeedback %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.worker.worker_name}}</td>
+                <td>{{i.feedback_content}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

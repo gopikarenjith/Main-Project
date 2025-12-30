@@ -20,6 +20,7 @@ urlpatterns=[
     path('assign/<int:wid>/<int:rid>',views.assign,name="assign"),
     path('Amount/<int:aid>',views.Amount,name="Amount"),
     path('Feedback/',views.Feedback,name="Feedback"),
+    path('Logout/',views.Logout,name="Logout"),
 
 
 ]

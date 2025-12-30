@@ -10,6 +10,7 @@ urlpatterns = [
     path('UpdateAssign/<int:id>/<int:status>',views.UpdateAssign,name="UpdateAssign"),
     path('Updates/<int:id>',views.Updates,name="Updates"),
     path('Feedback/',views.Feedback,name="Feedback"),
+    path('Logout/',views.Logout,name="Logout"),
 
 
     ]

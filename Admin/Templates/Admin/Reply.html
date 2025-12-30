@@ -1,30 +1,104 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'Admin/Header.html' %}
+{% block content %}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reply</title>
+
 </head>
-<body>
-    <form action="" method="post">
-        {% csrf_token %}
-        <table border="2">
-            <tr>
-                <td>Reply</td>
-                <td><input required type="text" name="txt_reply" title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$"/></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><input type="submit" value="Submit"></td>
-                
-            </tr>
-        </table>
-    </form>
-</body>
+<style>
+/* --------------------------------------------
+   REPLY PAGE — UNIQUE CLASS NAMES
+   THEME: DARK MODE + BRIGHT RED
+--------------------------------------------- */
+
+.reply-page-wrapper {
+    width: 100%;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.reply-card {
+    width: 40%;
+    background: #1e1e2d;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #3a3a4a;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.reply-title {
+    text-align: center;
+    font-size: 24px;
+    color: #ff0000; /* Bright Red */
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.reply-label {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.reply-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    margin-bottom: 18px;
+    border-radius: 6px;
+    border: 1px solid #555;
+    background: #2a2a3b;
+    color: white;
+    font-size: 16px;
+}
+
+.reply-submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #ff0000; /* Bright Red */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.reply-submit-btn:hover {
+    background: #cc0000; /* Darker Red */
+}
+</style>
+
+<div class="reply-page-wrapper">
+
+    <div class="reply-card">
+
+        <div class="reply-title">Send Reply</div>
+
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <label class="reply-label">Reply</label>
+            <input required 
+                   type="text" 
+                   name="txt_reply"
+                   class="reply-input"
+                   title="Only alphabets allowed. First letter must be capital."
+                   pattern="^[A-Z][a-zA-Z ]*$">
+
+            <button type="submit" class="reply-submit-btn">Submit</button>
+        </form>
+
+    </div>
+
+</div>
 
 {% if msg %}
 <script>
-    alert("{{msg}}")
-    window.location="{% url 'Admin:ViewComplaint' %}"
+    alert("{{msg}}");
+    window.location = "{% url 'Admin:ViewComplaint' %}";
 </script>
 {% endif %}
-</html>
+
+{% endblock %}

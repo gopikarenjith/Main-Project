@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from Guest.models import*
 from Builder.models import*
 from User.models import *
@@ -159,3 +159,7 @@ def Feedback(request):
         return render (request,'Builder/Feedback.html',{'msg':'Successfully Inserted'})
     else:
         return render (request,'Builder/Feedback.html')
+    
+def Logout(request):
+    del request.session['bid']
+    return redirect('Guest:Login')

@@ -1,55 +1,182 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'Admin/Header.html' %}
+{% block content %}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViewComplaint</title>
+    <title>viewcomplaint</title>
+
 </head>
-<body>
-    {% csrf_token %}
-    <table border="2">
-        <tr>
-            <td>SINO</td>
-            <td>User Name</td>
-            <td>Email</td>
-            <td>Title</td>
-            <td>Content</td>
-            <td>Date</td>
-            <td>Action</td>
-        </tr>
-        {% for i in complaintdata %}
-        <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{i.user_id.user_name}}</td>
-            <td>{{i.user_id.user_email}}</td>
-            <td>{{i.Complaint_title}}</td>
-            <td>{{i.Complaint_content}}</td>
-            <td>{{i.Complaint_date}}</td>
-            <td><a href="{% url 'Admin:Reply'  i.id%}">Reply</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-    <table border="2">
-        <tr>
-            <td>SINO</td>
-            <td>User Name</td>
-            <td>Email</td>
-            <td>Title</td>
-            <td>Content</td>
-            <td>Date</td>
-            <td>Reply</td>
-            </tr>
-        {% for i in complaintone %}
-        <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{i.user_id.user_name}}</td>
-            <td>{{i.user_id.user_email}}</td>
-            <td>{{i.Complaint_title}}</td>
-            <td>{{i.Complaint_content}}</td>
-            <td>{{i.Complaint_date}}</td>
-            <td>{{i.Complaint_reply}}</td>
-        </tr>
-        {% endfor %}
-        </table>
-</body>
-</html>
+<div class="complaint-page container my-5">
+    <h2 class="complaint-page-title mb-4">User Complaints</h2>
+
+    <!-- Complaints Pending Reply -->
+    <div class="complaint-table-wrapper mb-5">
+        <h4 class="table-subtitle">Pending Complaints</h4>
+        <div class="table-responsive">
+            <table class="complaint-table">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>User Name</th>
+                        <th>Email</th>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in complaintdata %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.user_id.user_name }}</td>
+                        <td>{{ i.user_id.user_email }}</td>
+                        <td>{{ i.Complaint_title }}</td>
+                        <td>{{ i.Complaint_content }}</td>
+                        <td>{{ i.Complaint_date }}</td>
+                        <td><a href="{% url 'Admin:Reply' i.id %}" class="reply-btn">Reply</a></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7">No pending complaints</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Complaints with Reply -->
+    <div class="complaint-table-wrapper">
+        <h4 class="table-subtitle">Replied Complaints</h4>
+        <div class="table-responsive">
+            <table class="complaint-table replied">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>User Name</th>
+                        <th>Email</th>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Date</th>
+                        <th>Reply</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in complaintone %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.user_id.user_name }}</td>
+                        <td>{{ i.user_id.user_email }}</td>
+                        <td>{{ i.Complaint_title }}</td>
+                        <td>{{ i.Complaint_content }}</td>
+                        <td>{{ i.Complaint_date }}</td>
+                        <td>{{ i.Complaint_reply }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7">No replied complaints</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+/* ---------- CONTAINER & PAGE ---------- */
+.complaint-page {
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+}
+
+/* ---------- PAGE TITLE ---------- */
+.complaint-page-title {
+    color: #d72626; /* chilli red */
+    text-align: center;
+    font-weight: 700;
+}
+
+/* ---------- TABLE WRAPPER ---------- */
+.complaint-table-wrapper {
+    background: #1e1e2d; /* dark card */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+    border: 1px solid #3a3a4a;
+}
+
+/* Subtitle for sections */
+.table-subtitle {
+    color: #d72626; /* chilli red */
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* Table styling */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.complaint-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #fff;
+}
+
+.complaint-table th,
+.complaint-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.complaint-table th {
+    background-color: #d72626; /* chilli red header */
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.complaint-table tr:nth-child(even) {
+    background-color: #2a2a3b;
+}
+
+.complaint-table tr:hover {
+    background-color: #a71d1d; /* darker chilli red hover */
+    transition: background-color 0.3s ease;
+}
+
+/* Reply button */
+.reply-btn {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: #d72626; /* chilli red */
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.reply-btn:hover {
+    background-color: #a71d1d; /* darker chilli red hover */
+}
+
+/* Replied complaints table uses same chilli red color */
+.complaint-table.replied th {
+    background-color: #d72626; /* chilli red for replied */
+}
+
+.complaint-table.replied tr:hover {
+    background-color: #a71d1d; /* darker chilli red hover */
+}
+
+@media (max-width: 768px) {
+    .complaint-table th,
+    .complaint-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+</style>
+
+{% endblock %}

@@ -1,137 +1,129 @@
 {% extends 'Builder/Header.html' %}
 {% block content %}
-<br><br><br><br><br><br>
+<head>
+    <title>Edit profile</title>
 
+</head>
 <style>
-/* ---------- ORANGE MODERN CARD STYLE FOR EDIT PROFILE ---------- */
+/* ------------ UNIQUE BUILDER EDIT PROFILE PAGE CSS ---------------- */
 
-.editprofile-wrapper {
+.builder-edit-container {
     display: flex;
     justify-content: center;
-    padding: 40px;
-    font-family: Arial, Helvetica, sans-serif;
+    padding: 80px 20px;
 }
 
-.editprofile-card {
-    width: 480px;
-    background: #fff7ef;
-    border: 3px solid #ff8800;
-    border-radius: 14px;
-    padding: 30px 40px;
-    box-shadow: 0px 4px 15px rgba(255, 136, 0, 0.3);
+.builder-edit-card {
+    width: 500px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    animation: fadeBuilder 0.6s ease-in-out;
+    border-top: 5px solid #ff6600;
 }
 
-.editprofile-title {
+.builder-edit-title {
     text-align: center;
-    font-size: 23px;
-    font-weight: bold;
-    color: #ff6a00;
-    margin-bottom: 25px;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
 }
 
-.editprofile-table {
-    width: 100%;
+.builder-form-group {
+    margin-bottom: 15px;
 }
 
-.editprofile-table td {
-    padding: 12px 6px;
-    font-size: 16px;
-    color: #444;
+.builder-form-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
 }
 
-.editprofile-input,
-.editprofile-textarea {
+.builder-form-group input,
+.builder-form-group textarea {
     width: 100%;
     padding: 10px;
-    border: 2px solid #ffa24d;
-    border-radius: 6px;
-    font-size: 15px;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    outline: none;
     transition: 0.3s;
 }
 
-.editprofile-input:focus,
-.editprofile-textarea:focus {
-    border-color: #ff6a00;
-    outline: none;
+.builder-form-group input:focus,
+.builder-form-group textarea:focus {
+    border-color: #ff6600;
+    box-shadow: 0 0 5px rgba(255,102,0,0.4);
 }
 
-.editprofile-textarea {
-    height: 80px;
-    resize: none;
-}
-
-.editprofile-btn {
-    background: #ff6a00;
+.builder-submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #ff6600;
     color: white;
-    padding: 12px 28px;
-    font-size: 16px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.editprofile-btn:hover {
-    background: #ff8a33;
+.builder-submit-btn:hover {
+    background: #cc5200;
+    transform: translateY(-2px);
 }
 
-.editprofile-center {
-    text-align: center;
+/* Animation */
+@keyframes fadeBuilder {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
 }
 </style>
 
-<div class="editprofile-wrapper">
-<div class="editprofile-card">
+<!-- ------------ BUILDER EDIT PROFILE CONTENT ---------------- -->
 
-    <div class="editprofile-title">Edit Profile</div>
+<div class="builder-edit-container">
 
-    <form action="" method="post">
-        {% csrf_token %}
+    <div class="builder-edit-card">
 
-        <table class="editprofile-table">
-            <tr>
-                <td>Name</td>
-                <td>
-                    <input required type="text" name="txt_name"
-                    class="editprofile-input"
-                    title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter"
-                    pattern="^[A-Z]+[a-zA-Z ]*$" />
-                </td>
-            </tr>
+        <div class="builder-edit-title">Edit Profile</div>
 
-            <tr>
-                <td>Email</td>
-                <td>
-                    <input type="email" required name="txt_email" class="editprofile-input" />
-                </td>
-            </tr>
+        <form method="post">
+            {% csrf_token %}
 
-            <tr>
-                <td>Contact</td>
-                <td>
-                    <input type="text" required name="txt_contact" class="editprofile-input"
-                    pattern="[7-9]{1}[0-9]{9}"
-                    title="Phone number must start with 7–9 and contain 10 digits" />
-                </td>
-            </tr>
+            <div class="builder-form-group">
+                <label>Name</label>
+                <input type="text" required name="txt_name"
+                title="Name Allows Only Alphabets, Spaces and First Letter Must Be Capital Letter"
+                pattern="^[A-Z]+[a-zA-Z ]*$">
+            </div>
 
-            <tr>
-                <td>Address</td>
-                <td>
-                    <textarea required name="txt_address" class="editprofile-textarea"></textarea>
-                </td>
-            </tr>
+            <div class="builder-form-group">
+                <label>Email</label>
+                <input type="email" required name="txt_email">
+            </div>
 
-            <tr>
-                <td colspan="2" class="editprofile-center">
-                    <input type="submit" value="Update" class="editprofile-btn">
-                </td>
-            </tr>
-        </table>
+            <div class="builder-form-group">
+                <label>Contact</label>
+                <input type="text" required name="txt_contact"
+                pattern="[7-9]{1}[0-9]{9}"
+                title="Phone number must start with 7-9 and contain 10 digits">
+            </div>
 
-    </form>
+            <div class="builder-form-group">
+                <label>Address</label>
+                <textarea required name="txt_address" rows="3"></textarea>
+            </div>
 
-</div>
+            <button type="submit" class="builder-submit-btn">Update</button>
+
+        </form>
+
+    </div>
+
 </div>
 
 {% if msg %}
@@ -140,6 +132,5 @@
     window.location="{% url 'Builder:MyProfile' %}"
 </script>
 {% endif %}
+
 {% endblock %}
-
-

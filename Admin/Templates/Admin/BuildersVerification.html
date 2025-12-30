@@ -1,49 +1,165 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'Admin/Header.html' %}
+{% block content %}
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BuilderVerification</title>
+    <title>BuildersVerfication</title>
+
 </head>
-<body>
-    {% csrf_token %}
-    <table border="2">
-        <tr>
-            <td>SINO</td>
-            <td>Name</td>
-            <td>Email</td>
-            <td>Contact</td>
-            <td>Address</td>
-            <td>logo</td>
-            <td>License</td>
-            <td>District</td>
-            <td>Place</td>
-            <td>doj</td>
-            <td>Action</td>
-        </tr>
-         {% for i in buildersverificationdata %}
-        <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{i.builders_name}}</td>
-            <td>{{i.builders_email}}</td>
-            <td>{{i.builders_contact}}</td>
-            <td>{{i.builders_address}}</td>
-            <td><img src="{{i.builders_logo.url}}" width="150" alt=""></td>
-            <td><img src="{{i.builders_license.url}}" width="150" alt=""></td>
-             <td>{{i.builders_doj}}</td>
-            <td>{{i.place.district.district_name}}</td>
-            <td>{{i.place.place_name}}</td>
-            <td><a href="{% url 'Admin:Accept' i.id %}">Accept</a>
-            <a href="{% url 'Admin:Reject' i.id %}">Reject</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-</body>
-</html>
+<div class="builder-verif-page container my-5">
+
+    <h2 class="builder-verif-title mb-4">Builders Verification</h2>
+
+    <!-- ---------- TABLE ---------- -->
+    <div class="builder-verif-table-wrapper">
+        <table class="builder-verif-table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Address</th>
+                    <th>Logo</th>
+                    <th>License</th>
+                    <th>D.O.J</th>
+                    <th>District</th>
+                    <th>Place</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in buildersverificationdata %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.builders_name }}</td>
+                    <td>{{ i.builders_email }}</td>
+                    <td>{{ i.builders_contact }}</td>
+                    <td>{{ i.builders_address }}</td>
+                    <td><img src="{{ i.builders_logo.url }}" width="120" class="builder-verif-img" alt="Logo"></td>
+                    <td><img src="{{ i.builders_license.url }}" width="120" class="builder-verif-img" alt="License"></td>
+                    <td>{{ i.builders_doj }}</td>
+                    <td>{{ i.place.district.district_name }}</td>
+                    <td>{{ i.place.place_name }}</td>
+                    <td class="builder-verif-action">
+                        <a href="{% url 'Admin:Accept' i.id %}" class="accept-btn">Accept</a>
+                        <a href="{% url 'Admin:Reject' i.id %}" class="reject-btn">Reject</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="11">No builder verifications pending</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<style>
+/* ---------- PAGE CONTAINER ---------- */
+.builder-verif-page {
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+}
+
+/* ---------- PAGE TITLE ---------- */
+.builder-verif-title {
+    color: #d72626; /* Chilli Red */
+    text-align: center;
+    font-weight: 700;
+}
+
+/* ---------- TABLE WRAPPER ---------- */
+.builder-verif-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 10px;
+    background: #1e1e2d;
+    padding: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* ---------- TABLE ---------- */
+.builder-verif-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #fff;
+}
+
+.builder-verif-table th,
+.builder-verif-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #333;
+    text-align: center;
+}
+
+.builder-verif-table th {
+    background-color: #d72626; /* Chilli Red */
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.builder-verif-table tr:nth-child(even) {
+    background-color: #2a2a3b;
+}
+
+.builder-verif-table tr:hover {
+    background-color: #a71d1d; /* Darker chilli red hover */
+    transition: background-color 0.3s ease;
+}
+
+/* ---------- IMAGES ---------- */
+.builder-verif-img {
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* ---------- ACTION BUTTONS ---------- */
+.builder-verif-action a {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 2px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.accept-btn {
+    background-color: #28a745; /* Green for accept */
+}
+
+.accept-btn:hover {
+    background-color: #1e7e34;
+}
+
+.reject-btn {
+    background-color: #d72626; /* Chilli Red for reject */
+}
+
+.reject-btn:hover {
+    background-color: #a71d1d;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .builder-verif-table-wrapper {
+        padding: 10px;
+    }
+    .builder-verif-table th, 
+    .builder-verif-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+</style>
+
 {% if msg %}
 <script>
-    alert("{{msg}}")
-    window.location="{% url 'Admin:BuildersVerification' %}"
+    alert("{{msg}}");
+    window.location="{% url 'Admin:BuildersVerification' %}";
 </script>
 {% endif %}
+
+{% endblock %}

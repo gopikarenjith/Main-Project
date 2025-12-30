@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from Builder.models import*
 from Worker.models import*
 
@@ -86,4 +86,6 @@ def Feedback(request):
 
 
 
-
+def Logout(request):
+    del request.session['wid']
+    return redirect('Guest:Login')

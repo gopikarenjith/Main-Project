@@ -73,7 +73,7 @@ def ViewBuilders(request):
     ar=[1,2,3,4,5]
     parry=[]
     avg=0
-    viewdata=tbl_builders.objects.filter(id=request.session['bid'])
+    viewdata=tbl_builders.objects.all()
     tot=0
     for i in viewdata:
         ratecount=tbl_rating.objects.filter(builder=i.id).count()
@@ -239,3 +239,7 @@ def Loader(request):
 
 def Payment_suc(request):
     return render(request,"User/Payment_suc.html")
+
+def Logout(request):
+    del request.session['uid']
+    return redirect('Guest:Login')

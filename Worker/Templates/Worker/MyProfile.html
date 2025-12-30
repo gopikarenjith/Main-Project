@@ -1,165 +1,154 @@
 {% extends 'Worker/Header.html' %}
 {% block content %}
+<head>
+    <title>MyProfile</title>
 
+</head>
 <style>
-    /* OUTER PAGE WRAPPER */
-    .worker-page-border {
-        width: 80%;
-        margin: auto;
-        padding: 40px 30px;
-        display: flex;
-        justify-content: center;
-    }
+/* --- UNIQUE WORKER PROFILE PAGE CSS --- */
 
-    /* PROFILE CARD WITH ANIMATED NEON BORDER */
-    .worker-profile-card {
-        width: 520px;
-        background: #fff; /* Solid white background */
-        padding: 30px;
-        border-radius: 20px;
-        position: relative;
-        text-align: center;
-        color: #333;
-        overflow: hidden;
-    }
+.worker-profile-container {
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px;
+}
 
-    /* Neon Animated Outer Border */
-    .worker-profile-card::before {
-        content: '';
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(45deg, #f39c12, #e74c3c, #8e44ad, #3498db, #1abc9c, #f39c12);
-        background-size: 400% 400%;
-        border-radius: 22px;
-        z-index: -1;
-        animation: neonGlow 20s linear infinite;
-    }
+.worker-profile-card {
+    width: 450px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    animation: fadeIn 0.6s ease-in-out;
+    border-top: 5px solid #f39c12; /* Orange top border */
+    text-align: center;
+}
 
-    @keyframes neonGlow {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
+.worker-profile-heading {
+    font-size: 28px;
+    font-weight: 700;
+    color: #f39c12;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Poppins', sans-serif;
+}
 
-    /* Inner card with solid orange border */
-    .worker-profile-inner {
-        background: #fff; /* White background */
-        border-radius: 18px;
-        padding: 20px;
-        position: relative;
-        z-index: 1;
-        border: 2px solid #f39c12; /* Single orange border */
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    }
+.worker-profile-photo {
+    margin-bottom: 20px;
+}
 
-    /* HEADING INSIDE CARD */
-    .worker-card-heading {
-        font-size: 28px;
-        font-weight: bold;
-        color: #f39c12;
-        margin-bottom: 20px;
-        text-transform: uppercase;
-        text-shadow: 0 0 8px #f39c12, 0 0 15px #f39c12;
-    }
+.worker-profile-photo img {
+    width: 150px;
+    height: 150px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid #f39c12;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
 
-    /* CIRCLE PROFILE PHOTO */
-    .worker-profile-photo {
-        width: 160px;
-        height: 160px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 4px solid #f39c12;
-        margin-bottom: 20px;
-    }
+.worker-profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
 
-    /* DETAILS TABLE */
-    .worker-details-table {
-        width: 100%;
-        margin-top: 10px;
-        border-collapse: collapse;
-    }
+.worker-profile-table th {
+    width: 40%;
+    padding: 12px;
+    background: #f7f7f7;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+    text-align: left;
+}
 
-    .worker-details-table td {
-        padding: 12px 5px;
-        font-size: 17px;
-        color: #333;
-        font-weight: 500;
-        border-bottom: 1px solid #eee;
-        text-align: left;
-    }
+.worker-profile-table td {
+    padding: 12px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    color: #444;
+    text-align: left;
+}
 
-    .worker-details-table td:nth-child(1) {
-        font-weight: bold;
-        width: 40%;
-    }
+.worker-profile-actions {
+    margin-top: 20px;
+}
 
-    /* ORANGE BUTTON STYLE */
-    .worker-btn {
-        display: inline-block;
-        padding: 10px 22px;
-        background: #f39c12;
-        color: white !important;
-        border-radius: 8px;
-        font-size: 15px;
-        font-weight: bold;
-        text-decoration: none;
-        margin: 5px 10px;
-        transition: 0.3s;
-    }
+.worker-profile-btn {
+    padding: 10px 20px;
+    background: #f39c12;
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 8px;
+    margin: 5px;
+    display: inline-block;
+    transition: 0.3s;
+    font-weight: 600;
+}
 
-    .worker-btn:hover {
-        background: #d35400;
-        color: white !important;
-    }
+.worker-profile-btn:hover {
+    background: #d35400;
+    transform: translateY(-2px);
+}
+
+.worker-profile-btn.secondary {
+    background: #444;
+}
+
+.worker-profile-btn.secondary:hover {
+    background: #000;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
 </style>
 
-<br><br><br><br>
 
-<div class="worker-page-border">
+<!-- Worker My Profile Section -->
+<div class="worker-profile-container">
 
     <div class="worker-profile-card">
 
-        <div class="worker-profile-inner">
+        <!-- Page Heading inside card -->
+        <div class="worker-profile-heading">My Profile</div>
 
-            <!-- CARD HEADING -->
-            <div class="worker-card-heading">My Profile</div>
+        <!-- Profile Photo -->
+        <div class="worker-profile-photo">
+            <img src="{{ worker.worker_photo.url }}" alt="Profile Photo">
+        </div>
 
-            <!-- CIRCLE PHOTO -->
-            <img src="{{worker.worker_photo.url}}" class="worker-profile-photo" alt="Profile Photo">
+        <!-- Profile Table -->
+        <table class="worker-profile-table">
+            <tr>
+                <th>Name</th>
+                <td>{{ worker.worker_name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ worker.worker_email }}</td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td>{{ worker.worker_contact }}</td>
+            </tr>
+            <tr>
+                <th>District</th>
+                <td>{{ worker.place.district.district_name }}</td>
+            </tr>
+            <tr>
+                <th>Place</th>
+                <td>{{ worker.place.place_name }}</td>
+            </tr>
+        </table>
 
-            <!-- DETAILS TABLE -->
-            <table class="worker-details-table">
-                <tr>
-                    <td>Name</td>
-                    <td>{{worker.worker_name}}</td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td>{{worker.worker_email}}</td>
-                </tr>
-                <tr>
-                    <td>Contact</td>
-                    <td>{{worker.worker_contact}}</td>
-                </tr>
-                <tr>
-                    <td>District</td>
-                    <td>{{worker.place.district.district_name}}</td>
-                </tr>
-                <tr>
-                    <td>Place</td>
-                    <td>{{worker.place.place_name}}</td>
-                </tr>
-            </table>
-
-            <!-- BUTTONS -->
-            <div style="margin-top: 20px;">
-                <a href="{% url 'Worker:EditProfile' %}" class="worker-btn">Edit Profile</a>
-                <a href="{% url 'Worker:ChangePassword' %}" class="worker-btn">Change Password</a>
-            </div>
-
+        <!-- Buttons -->
+        <div class="worker-profile-actions">
+            <a class="worker-profile-btn" href="{% url 'Worker:EditProfile' %}">Edit Profile</a>
+            <a class="worker-profile-btn secondary" href="{% url 'Worker:ChangePassword' %}">Change Password</a>
         </div>
 
     </div>
@@ -167,5 +156,3 @@
 </div>
 
 {% endblock %}
-
-
