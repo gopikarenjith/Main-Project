@@ -70,10 +70,11 @@ def DeleteComplaint(request,cid):
     return render(request,'User/Complaint.html',{'msg':'Deleted successfully..'})
 
 def ViewBuilders(request):
+    districtdata=tbl_district.objects.filter()
     ar=[1,2,3,4,5]
     parry=[]
     avg=0
-    viewdata=tbl_builders.objects.all()
+    viewdata=tbl_builders.objects.filter(builders_status=1)
     tot=0
     for i in viewdata:
         ratecount=tbl_rating.objects.filter(builder=i.id).count()
@@ -88,7 +89,7 @@ def ViewBuilders(request):
             parry.append(0)
         # print(parry)
     datas=zip(viewdata,parry)
-    return render(request,'User/ViewBuilders.html',{"viewdata":datas,'ar':ar})   
+    return render(request,'User/ViewBuilders.html',{"viewdata":datas,'ar':ar,'districtdata':districtdata})   
 
 def ViewWork(request,id):
     viewworkdata=tbl_work.objects.filter(builder=id)
@@ -243,3 +244,26 @@ def Payment_suc(request):
 def Logout(request):
     del request.session['uid']
     return redirect('Guest:Login')
+
+def Ajaxbuilder(request):
+    place_id=tbl_place.objects.get(id=request.GET.get('pid'))
+    districtdata=tbl_district.objects.filter()
+    ar=[1,2,3,4,5]
+    parry=[]
+    avg=0
+    viewdata=tbl_builders.objects.filter(builders_status=1,place=place_id)
+    tot=0
+    for i in viewdata:
+        ratecount=tbl_rating.objects.filter(builder=i.id).count()
+        if ratecount>0:
+            ratedata=tbl_rating.objects.filter(builder=i.id)
+            for j in ratedata:
+                tot=tot+j.rating_data
+                avg=tot//ratecount
+                #print(avg)
+            parry.append(avg)
+        else:
+            parry.append(0)
+        # print(parry)
+    datas=zip(viewdata,parry)
+    return render(request,'User/AjaxBuilder.html',{"data":datas,'ar':ar,'districtdata':districtdata}) 

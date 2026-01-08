@@ -1,12 +1,12 @@
 {% extends 'User/Header.html' %}
 {% block content %}
 <br><br><br><br><br><br>
-<head>
-    <title>ViewBuilders</title>
 
+<head>
+    <title>View Builders</title>
 </head>
+
 <style>
-    /* UNIQUE CLASS NAMESPACE */
     .vb-container * {
         font-family: Arial, sans-serif;
     }
@@ -22,9 +22,41 @@
         font-size: 28px;
         font-weight: bold;
         color: #ff6600;
-        margin-bottom: 25px;
+        margin-bottom: 15px;
     }
 
+    /* 🔍 SEARCH BAR */
+    .vb-search-bar {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .vb-search-bar input,
+    .vb-search-bar select {
+        padding: 8px 12px;
+        border: 2px solid #ff8800;
+        border-radius: 6px;
+        font-size: 14px;
+        min-width: 180px;
+    }
+
+    .vb-search-btn {
+        background: #ff7700;
+        color: white;
+        border: none;
+        padding: 8px 18px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .vb-search-btn:hover {
+        background: #ff5500;
+    }
+
+    /* TABLE */
     .vb-table {
         width: 100%;
         border-collapse: collapse;
@@ -38,25 +70,21 @@
         background: #ff8800;
         color: white;
         padding: 12px;
-        font-size: 16px;
         text-align: center;
     }
 
     .vb-table td {
         padding: 12px;
         border-bottom: 1px solid #ffddbb;
-        font-size: 15px;
         text-align: center;
     }
 
     .vb-table tr:hover {
         background: #fff3e6;
-        transition: 0.3s;
     }
 
     .vb-logo {
         width: 120px;
-        height: auto;
         border-radius: 8px;
         border: 2px solid #ff8800;
     }
@@ -67,10 +95,8 @@
         padding: 6px 12px;
         border-radius: 6px;
         text-decoration: none;
-        font-size: 14px;
         margin: 3px;
         display: inline-block;
-        transition: 0.3s;
     }
 
     .vb-action-btn:hover {
@@ -79,7 +105,6 @@
 
     .star-warning {
         color: orange;
-        font-size: 16px;
     }
 </style>
 
@@ -87,7 +112,36 @@
 
     <h2 class="vb-title">Registered Builders</h2>
 
-    <table class="vb-table">
+    <!-- 🔍 SEARCH FORM -->
+    <form method="get" class="vb-search-bar">
+
+        <!-- Builder Name -->
+        <!-- <input type="text" name="builder"
+               placeholder="Search Builder Name"
+               value="{{ request.GET.builder }}"> -->
+
+        <!-- District -->
+        <select name="district" id="sel_district">
+            <option value="">Select District</option>
+            {% for d in districtdata %}
+                <option value="{{ d.id }}"
+                {% if request.GET.district == d.id|stringformat:"s" %}selected{% endif %}>
+                    {{ d.district_name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <!-- Place -->
+        <select name="place" id="sel_place">
+            <option value="">Select Place</option>
+        </select>
+
+        <button type="submit" class="vb-search-btn">Search</button>
+
+    </form>
+
+    <!-- TABLE -->
+    <table class="vb-table" id="result">
         <tr>
             <th>SINO</th>
             <th>Name</th>
@@ -109,7 +163,7 @@
             <td>{{ i.builders_contact }}</td>
 
             <td>
-                <img src="{{ i.builders_logo.url }}" class="vb-logo" alt="">
+                <img src="{{ i.builders_logo.url }}" class="vb-logo">
             </td>
 
             <td>{{ i.builders_address }}</td>
@@ -131,10 +185,43 @@
                 <a href="{% url 'User:Request' i.id %}" class="vb-action-btn">Request</a>
             </td>
         </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="10">No builders found</td>
+        </tr>
         {% endfor %}
     </table>
 
 </div>
 
-{% endblock %}
+<!-- JQUERY -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<!-- AJAX PLACE LOAD -->
+<script>
+    $("#sel_district").change(function () {
+        var did = $(this).val();
+        $.ajax({
+            url: "{% url 'Guest:AjaxPlace' %}",
+            data: { did: did },
+            success: function (data) {
+                $("#sel_place").html(data);
+            }
+        });
+    });
+
+    $("#sel_place").change(function () {
+        var pid = $(this).val();
+        $.ajax({
+            url: "{% url 'User:Ajaxbuilder' %}",
+            data: { pid: pid },
+            success: function (data) {
+                $("#result").html(data);
+            }
+        });
+    });
+    
+</script>
+
+{% endblock %}

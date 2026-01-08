@@ -27,6 +27,108 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+
+    <style>
+        /* SECTION */
+        .services-area1 {
+            padding: 80px 0;
+        }
+
+        /* TITLE */
+        .section-tittle h2 {
+            font-size: 90px;
+            text-align: center;
+        }
+
+        /* SERVICE CARD */
+        .single-service-cap {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: 0.4s ease-in-out;
+        }
+
+        .single-service-cap:hover {
+            transform: translateY(-8px);
+        }
+
+        /* IMAGE WRAPPER (FIXED SIZE) */
+        .service-img {
+            width: 100%;
+            height: 260px;
+            /* SAME HEIGHT FOR ALL IMAGES */
+            overflow: hidden;
+        }
+
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* IMPORTANT */
+            transition: 0.4s ease-in-out;
+        }
+
+        /* HOVER ZOOM EFFECT */
+        .single-service-cap:hover img {
+            transform: scale(1.08);
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            .section-tittle h2 {
+                font-size: 50px;
+            }
+
+            .service-img {
+                height: 220px;
+            }
+        }
+    </style>
+    <style>
+        /* PROJECT CARD */
+        .single-project {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: 0.4s ease-in-out;
+        }
+
+        .single-project:hover {
+            transform: translateY(-8px);
+        }
+
+        /* FIXED IMAGE SIZE */
+        .project-img {
+            width: 100%;
+            height: 280px;
+            /* SAME HEIGHT FOR ALL IMAGES */
+            overflow: hidden;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* IMPORTANT */
+            display: block;
+            transition: 0.4s ease-in-out;
+        }
+
+        /* HOVER ZOOM EFFECT */
+        .single-project:hover img {
+            transform: scale(1.08);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .project-img {
+                height: 220px;
+            }
+        }
+    </style>
 </head>
 
 <style>
@@ -75,10 +177,11 @@
                                         <ul id="navigation">
                                             <li><a href="{% url 'Guest:index' %}">Home</a></li>
                                             <li><a href="{% url 'Guest:Login' %}">Login</a></li>
-                                            <li><a href="{% url 'Guest:BuilderRegistration' %}">BuilderRegistration</a></li>
+                                            <li><a href="{% url 'Guest:BuilderRegistration' %}">BuilderRegistration</a>
+                                            </li>
                                             <li><a href="{% url 'Guest:UserRegistration' %}">UserRegistration</a></li>
                                             <!-- <li><a href="{% url 'Builder:WorkerRegistration' %}">WorkerRegistration</a> -->
-                                                <!-- <ul class="submenu">
+                                            <!-- <ul class="submenu">
                                                     <li><a href="blog.html">Blog</a></li>
                                                     <li><a href="single-blog.html">Blog Details</a></li>
                                                 </ul> -->
@@ -164,81 +267,69 @@
         </div>
         <!-- slider Area End-->
         <!-- Services Area Start -->
-        <div class="services-area1 section-padding30">
+        <div class="services-area1">
             <div class="container">
-                <!-- section tittle -->
+
+                <!-- SECTION TITLE -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="section-tittle mb-55">
-                            <div class="section-tittle section-tittle2 mb-55">
-                                <h2 style="font-size: 90px;" class="lobster-regular" style="">Our Services</h2>
-                            </div>
-                            <!-- <span class="back-text">Services</span> -->
+                        <div class="section-tittle mb-5">
+                            <h2 class="lobster-regular">Our Services</h2>
                         </div>
                     </div>
                 </div>
+
+                <!-- SERVICES GRID -->
                 <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-service-cap mb-30">
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
+                        <div class="single-service-cap">
                             <div class="service-img">
                                 <img src="{% static 'Main/assets/img/service/servicess1.png' %}" alt="">
                             </div>
-                            
-                            
-                            <!-- <div class="service-cap">
-                                <h4><a href="services_details.html">Engineering techniques & implementation</a></h4>
-                                <a href="services_details.html" class="more-btn">Read More <i class="ti-plus"></i></a>
-                            </div> -->
-                            <!-- <div class="service-icon">
-                                <img src="{% static 'Main/assets/img/icon/services_icon1.png' %}" alt="">
-                            </div> -->
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-service-cap mb-30">
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
+                        <div class="single-service-cap">
                             <div class="service-img">
                                 <img src="{% static 'Main/assets/img/service/servicess2.png' %}" alt="">
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-service-cap mb-30">
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
+                        <div class="single-service-cap">
                             <div class="service-img">
                                 <img src="{% static 'Main/assets/img/service/servicess3.png' %}" alt="">
                             </div>
-                            
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-service-cap mb-30">
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
+                        <div class="single-service-cap">
                             <div class="service-img">
                                 <img src="{% static 'Main/assets/img/build3.jpg' %}" alt="">
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-service-cap mb-30">
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
+                        <div class="single-service-cap">
                             <div class="service-img">
                                 <img src="{% static 'Main/assets/img/build4.jpg' %}" alt="">
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-service-cap mb-30">
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
+                        <div class="single-service-cap">
                             <div class="service-img">
                                 <img src="{% static 'Main/assets/img/build2.jpg' %}" alt="">
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-service-cap mb-30">
-                            <div class="service-img">
-                                <img src="{% static 'Main/assets/img/service/servicess3.png' %}" alt="">
-                            </div>
-                            
-                        </div>
-                    </div> -->
+
                 </div>
             </div>
         </div>
@@ -249,8 +340,8 @@
                 <div class="left-content">
                     <!-- section tittle -->
                     <div class="section-tittle section-tittle2 mb-55">
-                        <div >
-                            <h1 style="font-size: 90px;" class="lobster-regular" style="">Who we are</h1 >
+                        <div>
+                            <h1 style="font-size: 90px;" class="lobster-regular" style="">Who we are</h1>
                         </div>
                         <!-- <span class="back-text">About us</span> -->
                     </div>
@@ -287,7 +378,7 @@
                             <!-- Section Tittle -->
                             <div class="section-tittle section-tittle3">
                                 <div class="section-tittle section-tittle2 mb-55">
-                                    <h2  style="font-size: 90px;" class="lobster-regular" style="">Our Projects</h2>
+                                    <h2 style="font-size: 90px;" class="lobster-regular" style="">Our Projects</h2>
                                 </div>
                                 <!-- <span class="back-text">Gallary</span> -->
                             </div>
@@ -297,21 +388,14 @@
                                 <!--Nav Button  -->
                                 <nav>
                                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                        <a class="nav-item nav-link active lobster-regular" id="nav-home-tab" data-toggle="tab"
-                                            href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="false">
+                                        <a class="nav-item nav-link active lobster-regular" id="nav-home-tab"
+                                            data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"
+                                            aria-selected="false">
                                             Show all </a>
-                                        <a class="nav-item nav-link lobster-regular" id="nav-profile-tab" data-toggle="tab"
-                                            href="#nav-profile" role="tab" aria-controls="nav-profile"
+                                        <a class="nav-item nav-link lobster-regular" id="nav-profile-tab"
+                                            data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile"
                                             aria-selected="false"> Intorior</a>
-                                        <a class="nav-item nav-link lobster-regular" id="nav-contact-tab" data-toggle="tab"
-                                            href="#nav-contact" role="tab" aria-controls="nav-contact"
-                                            aria-selected="false">Recent</a>
-                                        <a class="nav-item nav-link lobster-regular" id="nav-last-tab" data-toggle="tab"
-                                            href="#nav-last" role="tab" aria-controls="nav-contact"
-                                            aria-selected="false">Big building</a>
-                                        <a class="nav-item nav-link lobster-regular" id="nav-technology" data-toggle="tab"
-                                            href="#nav-techno" role="tab" aria-controls="nav-contact"
-                                            aria-selected="false">Park</a>
+
                                     </div>
                                 </nav>
                                 <!--End Nav Button  -->
@@ -321,456 +405,94 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <!-- Nav Card -->
                         <div class="tab-content active" id="nav-tabContent">
-                            <!-- card ONE -->
-                            <div class="tab-pane fade active show" id="nav-home" role="tabpanel"
-                                aria-labelledby="nav-home-tab">
+
+                            <!-- TAB ONE -->
+                            <div class="tab-pane fade active show" id="nav-home" role="tabpanel">
                                 <div class="project-caption">
                                     <div class="row">
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
+
+                                        <div class="col-lg-4 col-md-6 mb-4">
+                                            <div class="single-project">
                                                 <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project1.png' %}"
-                                                        alt="">
+                                                    <img src="{% static 'Main/assets/img/home2.jpg' %}" alt="">
                                                 </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                    <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
+
+                                        <div class="col-lg-4 col-md-6 mb-4">
+                                            <div class="single-project">
                                                 <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project2.png' %}"
-                                                        alt="">
+                                                    <img src="{% static 'Main/assets/img/home3.jpg' %}" alt="">
                                                 </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
+
+                                        <div class="col-lg-4 col-md-6 mb-4">
+                                            <div class="single-project">
                                                 <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project3.png' %}"
-                                                        alt="">
+                                                    <img src="{% static 'Main/assets/img/home4.jpg' %}" alt="">
                                                 </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project4.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project5.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project6.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                            <!-- Card TWO -->
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel"
-                                aria-labelledby="nav-profile-tab">
+
+                            <!-- TAB TWO -->
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel">
                                 <div class="project-caption">
                                     <div class="row">
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
+
+                                        <div class="col-lg-4 col-md-6 mb-4">
+                                            <div class="single-project">
                                                 <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project5.png' %}"
-                                                        alt="">
+                                                    <img src="{% static 'Main/assets/img/interior1.jpg' %}" alt="">
                                                 </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
+
+                                        <div class="col-lg-4 col-md-6 mb-4">
+                                            <div class="single-project">
                                                 <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project6.png' %}"
-                                                        alt="">
+                                                    <img src="{% static 'Main/assets/img/interior2.jpg' %}" alt="">
                                                 </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
+
+                                        <div class="col-lg-4 col-md-6 mb-4">
+                                            <div class="single-project">
                                                 <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project1.png' %}"
-                                                        alt="">
+                                                    <img src="{% static 'Main/assets/img/interior3.jpg' %}" alt="">
                                                 </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project2.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project3.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project4.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                            <!-- Card THREE -->
-                            <div class="tab-pane fade" id="nav-contact" role="tabpanel"
-                                aria-labelledby="nav-contact-tab">
-                                <div class="project-caption">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project3.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project4.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project1.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project2.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project5.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project6.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- card FUR -->
-                            <div class="tab-pane fade" id="nav-last" role="tabpanel" aria-labelledby="nav-last-tab">
-                                <div class="project-caption">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project1.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project2.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project3.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project4.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project5.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project6.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- card FIVE -->
-                            <div class="tab-pane fade" id="nav-techno" role="tabpanel" aria-labelledby="nav-technology">
-                                <div class="project-caption">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project1.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project2.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project3.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project4.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project5.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="single-project mb-30">
-                                                <div class="project-img">
-                                                    <img src="{% static 'Main/assets/img/gallery/project6.png' %}"
-                                                        alt="">
-                                                </div>
-                                                <!-- <div class="project-cap">
-                                                    <a href="project_details.html" class="plus-btn"><i class="ti-plus"></i></a>
-                                                   <h4><a href="project_details.html">Floride Chemicals</a></h4>
-                                                    <h4><a href="project_details.html">Factory</a></h4>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
-                        <!-- End Nav Card -->
                     </div>
                 </div>
+            </div>
             </div>
         </section>
         <style>
             .lobster-regular1 {
-    font-family: "Lobster", sans-serif !important;
-    font-weight: 400;
-    font-style: normal;
-    color: white;
-}
+                font-family: "Lobster", sans-serif !important;
+                font-weight: 400;
+                font-style: normal;
+                color: white;
+            }
 
-.lobster-regular2{
-    font-family: "Lobster", sans-serif !important;
-    font-weight: 400;
-    font-style: normal;
-    color: rgb(177, 177, 177) !important;
-}
+            .lobster-regular2 {
+                font-family: "Lobster", sans-serif !important;
+                font-weight: 400;
+                font-style: normal;
+                color: rgb(177, 177, 177) !important;
+            }
         </style>
         <!-- Project Area End -->
         <!-- contact with us Start -->
@@ -783,11 +505,13 @@
                                 <!-- Section Tittle -->
                                 <div class="section-tittle section-tittle4">
                                     <div class="lobster-regular">
-                                        <h2 style="font-size: 90px;" class="lobster-regular1" style="">Lets talk with us</h2>
+                                        <h2 style="font-size: 90px;" class="lobster-regular1" style="">Lets talk with us
+                                        </h2>
                                     </div>
                                     <!-- <span class="back-text">Lat`s chat</span> -->
                                 </div>
-                                <p style="font-size: 30px;" class="lobster-regular2">We welcome your questions, suggestions, and feedback regarding our construction
+                                <p style="font-size: 30px;" class="lobster-regular2">We welcome your questions,
+                                    suggestions, and feedback regarding our construction
                                     project. Our team is always open to discussions related to construction methods,
                                     materials, planning, and safety practices. Feel free to connect with us to share
                                     ideas, ask questions, or learn more about our work and objectives. Your interaction
@@ -910,7 +634,7 @@
                         <!-- Section Tittle -->
                         <div class="section-tittle section-tittle6 mb-50">
                             <div class="lobster-regular">
-                                <h2  style="font-size: 90px;" class="lobster-regular1" style="">Testimonial</h2>
+                                <h2 style="font-size: 90px;" class="lobster-regular1" style="">Testimonial</h2>
                             </div>
                             <!-- <span class="back-text">Feedback</span> -->
                         </div>
@@ -930,7 +654,8 @@
                                             fill-opacity="0" fill="rgb(0, 0, 0)"
                                             d="M82.623,59.861 L48.661,59.861 L48.661,25.988 L59.982,3.406 L76.963,3.406 L65.642,25.988 L82.623,25.988 L82.623,59.861 ZM3.377,25.988 L14.698,3.406 L31.679,3.406 L20.358,25.988 L37.340,25.988 L37.340,59.861 L3.377,59.861 L3.377,25.988 Z" />
                                         </svg>
-                                        <p style="font-size: 25px;" class="lobster-regular">This construction project reflects our commitment to quality, safety, and
+                                        <p style="font-size: 25px;" class="lobster-regular">This construction project
+                                            reflects our commitment to quality, safety, and
                                             practical learning. The guidance and support from our teachers and mentors
                                             helped us understand real-world construction practices and project planning.
                                             Their valuable feedback encouraged us to improve our skills, work

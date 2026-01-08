@@ -183,18 +183,20 @@ def WorkerType(request):
         return render(request,'Admin/WorkerType.html',{"workertypedata":workertypedata})
 
 def BuildersVerification(request):
-    buildersverificationdata=tbl_builders.objects.all()
-    return render(request,'Admin/BuildersVerification.html',{"buildersverificationdata":buildersverificationdata})    
+    pending=tbl_builders.objects.filter(builders_status=0)
+    accept=tbl_builders.objects.filter(builders_status=1)
+    reject=tbl_builders.objects.filter(builders_status=2)
+    return render(request,'Admin/BuildersVerification.html',{"pending":pending,"accept":accept,"reject":reject})    
 
 def Accept(request,aid):
     buildersverificationdata = tbl_builders.objects.get(id=aid)
-    buildersverificationdata.request_status=1
+    buildersverificationdata.builders_status=1
     buildersverificationdata.save()
     return render (request,'Admin/BuildersVerification.html',{'msg':"Request Accepted..."})
 
 def Reject(request,rid):
     buildersverificationdata = tbl_builders.objects.get(id=rid)
-    buildersverificationdata.request_status=2
+    buildersverificationdata.builders_status=2
     buildersverificationdata.save()
     return render (request,'Admin/BuildersVerification.html',{'msg':"Request Rejected..."})
 

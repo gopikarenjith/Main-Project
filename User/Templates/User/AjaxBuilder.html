@@ -1,0 +1,51 @@
+<table class="vb-table" id="result">
+        <tr>
+            <th>SINO</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Logo</th>
+            <th>Address</th>
+            <th>District</th>
+            <th>Place</th>
+            <th>Rating</th>
+            <th>Action</th>
+        </tr>
+
+        {% for i, j in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.builders_name }}</td>
+            <td>{{ i.builders_email }}</td>
+            <td>{{ i.builders_contact }}</td>
+
+            <td>
+                <img src="{{ i.builders_logo.url }}" class="vb-logo">
+            </td>
+
+            <td>{{ i.builders_address }}</td>
+            <td>{{ i.place.district.district_name }}</td>
+            <td>{{ i.place.place_name }}</td>
+
+            <td>
+                {% for k in ar %}
+                    {% if k <= j %}
+                        <i class="fa-solid fa-star star-warning"></i>
+                    {% else %}
+                        <i class="fa-solid fa-star" style="color:#ccc;"></i>
+                    {% endif %}
+                {% endfor %}
+            </td>
+
+            <td>
+                <a href="{% url 'User:ViewWork' i.id %}" class="vb-action-btn">View Work</a>
+                <a href="{% url 'User:Request' i.id %}" class="vb-action-btn">Request</a>
+            </td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="10">No builders found</td>
+        </tr>
+        {% endfor %}
+    </table>

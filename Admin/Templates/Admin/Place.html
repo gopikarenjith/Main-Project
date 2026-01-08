@@ -1,106 +1,108 @@
 {% extends 'Admin/Header.html' %}
 {% block content %}
+
 <head>
     <title>Place</title>
 
 </head>
 <style>
-/* --------------------------------------------
+    /* --------------------------------------------
    PLACE PAGE — UNIQUE CLASS NAMES
    THEME: DARK UI + BRIGHT RED
 --------------------------------------------- */
 
-.place-page-wrapper {
-    width: 100%;
-    padding: 40px 20px;
-}
+    .place-page-wrapper {
+        width: 100%;
+        padding: 40px 20px;
+    }
 
-/* ------------ FORM CARD ------------ */
-.place-form-card {
-    width: 40%;
-    margin: auto;
-    background: #1e1e2d;
-    padding: 25px;
-    border-radius: 12px;
-    border: 1px solid #3a3a4a;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-}
+    /* ------------ FORM CARD ------------ */
+    .place-form-card {
+        width: 40%;
+        margin: auto;
+        background: #1e1e2d;
+        padding: 25px;
+        border-radius: 12px;
+        border: 1px solid #3a3a4a;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
 
-.place-form-title {
-    text-align: center;
-    color: #ff0000; /* Bright Red */
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
+    .place-form-title {
+        text-align: center;
+        color: #ff0000;
+        /* Bright Red */
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
 
-.place-input,
-.place-select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0 18px 0;
-    background: #2a2a3b;
-    color: white;
-    border: 1px solid #555;
-    border-radius: 6px;
-}
+    .place-input,
+    .place-select {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0 18px 0;
+        background: #2a2a3b;
+        color: white;
+        border: 1px solid #555;
+        border-radius: 6px;
+    }
 
-.place-submit-btn {
-    width: 100%;
-    padding: 10px;
-    background: #ff0000;
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: .3s;
-}
+    .place-submit-btn {
+        width: 100%;
+        padding: 10px;
+        background: #ff0000;
+        border: none;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: .3s;
+    }
 
-.place-submit-btn:hover {
-    background: #cc0000;
-}
+    .place-submit-btn:hover {
+        background: #cc0000;
+    }
 
-/* ------------ TABLES ------------ */
-.place-table-wrapper {
-    width: 70%;
-    margin: 40px auto;
-    border-radius: 10px;
-    overflow: hidden;
-}
+    /* ------------ TABLES ------------ */
+    .place-table-wrapper {
+        width: 70%;
+        margin: 40px auto;
+        border-radius: 10px;
+        overflow: hidden;
+    }
 
-.place-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #1e1e2d;
-    color: white;
-}
+    .place-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #1e1e2d;
+        color: white;
+    }
 
-.place-table th {
-    background: #111827;
-    color: #ff0000;
-    padding: 12px;
-    font-size: 16px;
-}
+    .place-table th {
+        background: #111827;
+        color: #ff0000;
+        padding: 12px;
+        font-size: 16px;
+    }
 
-.place-table td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #333;
-}
+    .place-table td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #333;
+    }
 
-.place-actions a {
-    color: #ff0000;
-    text-decoration: none;
-    font-weight: bold;
-    transition: .3s;
-}
+    .place-actions a {
+        color: #ff0000;
+        text-decoration: none;
+        font-weight: bold;
+        transition: .3s;
+    }
 
-.place-actions a:hover {
-    color: #cc0000;
-    text-decoration: underline;
-}
+    .place-actions a:hover {
+        color: #cc0000;
+        text-decoration: underline;
+    }
 </style>
 
 <div class="place-page-wrapper">
@@ -121,13 +123,9 @@
                 {% endfor %}
             </select>
 
-            <input type="text"
-                   name="txt_place"
-                   class="place-input"
-                   required
-                   title="Name Allows Only Alphabets, Spaces, and First Letter Must Be Capital Letter"
-                   pattern="^[A-Z][a-zA-Z ]*$"
-                   value="{{placeOne.place_name}}">
+            <input type="text" name="txt_placename" class="place-input" required
+                title="Name Allows Only Alphabets, Spaces, and First Letter Must Be Capital Letter"
+                pattern="^[A-Z][a-zA-Z ]*$" value="{{placeOne.place_name}}">
 
             <button type="submit" class="place-submit-btn">Submit</button>
         </form>

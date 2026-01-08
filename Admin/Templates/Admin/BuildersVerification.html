@@ -10,6 +10,8 @@
 
     <!-- ---------- TABLE ---------- -->
     <div class="builder-verif-table-wrapper">
+        <div class="builder-verif-table-wrapper">Pending</div>
+        
         <table class="builder-verif-table">
             <thead>
                 <tr>
@@ -27,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for i in buildersverificationdata %}
+                {% for i in pending %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ i.builders_name }}</td>
@@ -42,6 +44,96 @@
                     <td class="builder-verif-action">
                         <a href="{% url 'Admin:Accept' i.id %}" class="accept-btn">Accept</a>
                         <a href="{% url 'Admin:Reject' i.id %}" class="reject-btn">Reject</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="11">No builder verifications pending</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="builder-verif-table-wrapper">
+        <div class="builder-verif-table-wrapper">Accepted</div>
+
+        <table class="builder-verif-table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Address</th>
+                    <th>Logo</th>
+                    <th>License</th>
+                    <th>D.O.J</th>
+                    <th>District</th>
+                    <th>Place</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in accept %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.builders_name }}</td>
+                    <td>{{ i.builders_email }}</td>
+                    <td>{{ i.builders_contact }}</td>
+                    <td>{{ i.builders_address }}</td>
+                    <td><img src="{{ i.builders_logo.url }}" width="120" class="builder-verif-img" alt="Logo"></td>
+                    <td><img src="{{ i.builders_license.url }}" width="120" class="builder-verif-img" alt="License"></td>
+                    <td>{{ i.builders_doj }}</td>
+                    <td>{{ i.place.district.district_name }}</td>
+                    <td>{{ i.place.place_name }}</td>
+                    <td class="builder-verif-action">
+                        <!-- <a href="{% url 'Admin:Accept' i.id %}" class="accept-btn">Accept</a> -->
+                        <a href="{% url 'Admin:Reject' i.id %}" class="reject-btn">Reject</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="11">No builder verifications pending</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="builder-verif-table-wrapper">
+        <div class="builder-verif-table-wrapper">Rejected</div>
+
+        <table class="builder-verif-table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Address</th>
+                    <th>Logo</th>
+                    <th>License</th>
+                    <th>D.O.J</th>
+                    <th>District</th>
+                    <th>Place</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in reject %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.builders_name }}</td>
+                    <td>{{ i.builders_email }}</td>
+                    <td>{{ i.builders_contact }}</td>
+                    <td>{{ i.builders_address }}</td>
+                    <td><img src="{{ i.builders_logo.url }}" width="120" class="builder-verif-img" alt="Logo"></td>
+                    <td><img src="{{ i.builders_license.url }}" width="120" class="builder-verif-img" alt="License"></td>
+                    <td>{{ i.builders_doj }}</td>
+                    <td>{{ i.place.district.district_name }}</td>
+                    <td>{{ i.place.place_name }}</td>
+                    <td class="builder-verif-action">
+                        <a href="{% url 'Admin:Accept' i.id %}" class="accept-btn">Accept</a>
+                        <!-- <a href="{% url 'Admin:Reject' i.id %}" class="reject-btn">Reject</a> -->
                     </td>
                 </tr>
                 {% empty %}
